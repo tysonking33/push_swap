@@ -266,7 +266,8 @@ void	large_sort(t_arrays *array)
 		a_idx = array->a_and_b_moves[b_idx] - array->a_size;
 		if (a_idx < 0)
 			a_idx = 0;
-		int r = 0;
+		int ra = 0;
+		int rra = 0;
 		printf("\narray->a_and_b_moves\n");
 		for (int i = 0; i <= array->b_size; i++)
 			printf("%d:%d ", i,array->a_and_b_moves[i]);
@@ -281,13 +282,13 @@ void	large_sort(t_arrays *array)
 			{
 				rotatea(array);
 				a_idx++;
-				r = 1;
+				ra++;
 			}
 			while (a_idx < (array->a_size/2) && a_idx > 1)
 			{
 				revrotatea(array);
 				a_idx--;
-				r = 2;
+				rra++;
 			}
 		}
 		if (b_idx < array->b_size && b_idx > 0) 
@@ -305,17 +306,15 @@ void	large_sort(t_arrays *array)
 			}
 		}
 		pa(array);
-		if (r == 1)
+		while (rra == 0 && ra > 0)
 		{
 			revrotatea(array);
-			revrotatea(array);
-			r = 0;
+			ra--;
 		}
-		else if (r == 2)
+		while (rra > 0 && ra == 0)
 		{
 			rotatea(array);
-			rotatea(array);
-			r = 0;
+			rra--;
 		}
 	}
 	while (array->a[array_a_size] > array->a[0])
