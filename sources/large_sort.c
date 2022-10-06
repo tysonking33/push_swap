@@ -195,7 +195,7 @@ void b_move_empty(t_arrays *array)
 
 void	large_sort(t_arrays *array)
 {
-	//finding location of smallest number
+		//finding location of smallest number
 	int small_loc;
 	small_loc = 0;
 
@@ -260,10 +260,11 @@ void	large_sort(t_arrays *array)
 		printf("%d:%d ", i, array->a_and_b_moves[i]);
 	}
 	printf("\n\n");*/
+	int rra_toggle = 0;
 	while (array->b_size >= 0)
 	{
 		b_idx = find_min_moves(array);
-		a_idx = array->a_and_b_moves[b_idx] - array->a_size;
+		a_idx = array->a_and_b_moves[b_idx] - b_idx - 1;
 		if (a_idx < 0)
 			a_idx = 0;
 		int ra = 0;
@@ -274,24 +275,39 @@ void	large_sort(t_arrays *array)
 
 		//printf("b_idx: %d\n", b_idx);
 		printf("\nb_idx: %d, a_idx: %d+++++++++++++++++++++++++++++++++\n\n", b_idx, a_idx);
-
 		//rotating a
 		if ((a_idx > -1) && (a_idx < array->a_size))
 		{
-			while (a_idx >= (array->a_size/2) && a_idx <= array->a_size)
+			printf("big knock\n");
+			if (a_idx >= (array->a_size/2) && a_idx <= array->a_size)
 			{
-				rotatea(array);
-				a_idx++;
-				ra++;
+				while (a_idx >= (array->a_size/2) && a_idx <= array->a_size)
+				{
+					rotatea(array);
+					a_idx++;
+					ra++;
+				}
 			}
 			//while (a_idx < (array->a_size/2) && a_idx > 0)
-			while (array->a[0] > array->b[array->b_size])
-			{
-				revrotatea(array);
-				a_idx--;
-				rra++;
+			else{
+				printf("a_idx: %d \n", a_idx);
+				while (a_idx > 1  && rra_toggle == 0)
+				{
+					rotatea(array);
+					a_idx--;
+					rra++;
+					rra_toggle = 1;
+				}
+				while (array->a_size - a_idx > -2 && rra_toggle != 0)
+				{
+					printf("qfeqwheg5y");
+					revrotatea(array);
+					a_idx++;
+					rra++;
+				}
 			}
 		}
+		b_idx = array->b_size - b_idx;
 		if (b_idx < array->b_size && b_idx > 0) 
 		{
 			//b_idx = b_idx - 1;
