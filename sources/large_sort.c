@@ -276,7 +276,7 @@ void	large_sort(t_arrays *array)
 		printf("\nb_idx: %d, a_idx: %d+++++++++++++++++++++++++++++++++\n\n", b_idx, a_idx);
 
 		//rotating a
-		if ((a_idx > 1) && (a_idx < array->a_size))
+		if ((a_idx > -1) && (a_idx < array->a_size))
 		{
 			while (a_idx >= (array->a_size/2) && a_idx <= array->a_size)
 			{
@@ -284,7 +284,8 @@ void	large_sort(t_arrays *array)
 				a_idx++;
 				ra++;
 			}
-			while (a_idx < (array->a_size/2) && a_idx > 1)
+			//while (a_idx < (array->a_size/2) && a_idx > 0)
+			while (array->a[0] > array->b[array->b_size])
 			{
 				revrotatea(array);
 				a_idx--;
@@ -306,17 +307,22 @@ void	large_sort(t_arrays *array)
 			}
 		}
 		pa(array);
-		while (rra == 0 && ra > 0)
+		/*while (rra == 0 && ra >= 0)
 		{
-			revrotatea(array);
+			rotatea(array);
 			ra--;
 		}
 		while (rra > 0 && ra == 0)
 		{
 			rotatea(array);
 			rra--;
+		}*/
+		while (array->a[array->a_size] > array->a[0])
+		{
+			printf("safdadasafsfdfsgsfgsdgfgs");
+			rotatea(array);
 		}
 	}
-	while (array->a[array_a_size] > array->a[0])
+	while (array->a[array->a_size] > array->a[0])
 		revrotatea(array);
 }
