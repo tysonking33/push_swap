@@ -48,7 +48,7 @@ int	main(int argc, char **argv)
 	}
 	else if ((array->a_size >= 3) && (sorted == 0))
 	{
-		large_sort(array);
+		large_sort1(array);
 	}
 	//print_array(array, "final array");
 	//sorted = check_sorted(array);

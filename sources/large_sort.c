@@ -260,15 +260,15 @@ void	large_sort(t_arrays *array)
 		printf("%d:%d ", i, array->a_and_b_moves[i]);
 	}
 	printf("\n\n");*/
-	int rra_toggle = 0;
+	//int rra_toggle = 0;
+	int ra = 0;
 	while (array->b_size >= 0)
 	{
 		b_idx = find_min_moves(array);
-		a_idx = array->a_and_b_moves[b_idx] - b_idx - 1;
+		a_idx = array->a_and_b_moves[b_idx] - b_idx;
 		if (a_idx < 0)
 			a_idx = 0;
-		int ra = 0;
-		int rra = 0;
+		//int rra = 0;
 		printf("\narray->a_and_b_moves\n");
 		for (int i = 0; i <= array->b_size; i++)
 			printf("%d:%d ", i,array->a_and_b_moves[i]);
@@ -276,34 +276,55 @@ void	large_sort(t_arrays *array)
 		//printf("b_idx: %d\n", b_idx);
 		printf("\nb_idx: %d, a_idx: %d+++++++++++++++++++++++++++++++++\n\n", b_idx, a_idx);
 		//rotating a
-		if ((a_idx > -1) && (a_idx < array->a_size))
+		if ((a_idx > -1) && (a_idx <= array->a_size))
 		{
-			printf("big knock\n");
 			if (a_idx >= (array->a_size/2) && a_idx <= array->a_size)
 			{
-				while (a_idx >= (array->a_size/2) && a_idx <= array->a_size)
+				printf("woah woah woah\n");
+				printf("a_idx: %d, ra: %d\n", a_idx, ra);
+				while (a_idx >= (array->a_size/2) && a_idx < array->a_size - 1 && ra == 0)
 				{
+					printf("a\n");
 					rotatea(array);
 					a_idx++;
-					ra++;
+					ra = 1;
 				}
+				while (a_idx > -1 && ra != 0)
+				{
+					printf("dog gamn\n");
+					rotatea(array);
+					a_idx--;
+				}
+				
 			}
 			//while (a_idx < (array->a_size/2) && a_idx > 0)
 			else{
 				printf("a_idx: %d \n", a_idx);
-				while (a_idx > 1  && rra_toggle == 0)
+				/*while (a_idx >= 0  && rra_toggle == 0)
 				{
-					rotatea(array);
+					printf("b\n");
+					revrotatea(array);
 					a_idx--;
 					rra++;
 					rra_toggle = 1;
 				}
 				while (array->a_size - a_idx > -2 && rra_toggle != 0)
 				{
-					printf("qfeqwheg5y");
+					printf("c\n");
 					revrotatea(array);
 					a_idx++;
 					rra++;
+				}*/
+				while (a_idx > 0)
+				{
+					printf("d\n");
+					revrotatea(array);
+					a_idx--;
+				}
+				if (array->a[array->a_size] < array->a[array->a_size - 1])
+				{
+					printf("poppopopdopasdpasodpasd\n");
+					swapa(array);
 				}
 			}
 		}
@@ -337,7 +358,12 @@ void	large_sort(t_arrays *array)
 		{
 			printf("safdadasafsfdfsgsfgsdgfgs");
 			rotatea(array);
+			if (array->a[array->a_size] > array->a[array->a_size - 1])
+				swapa(array);
+			ra = 1;
 		}
+		printf("......................................................................\n");
+		printf("......................................................................\n");
 	}
 	while (array->a[array->a_size] > array->a[0])
 		revrotatea(array);

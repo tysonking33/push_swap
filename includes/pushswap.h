@@ -39,4 +39,5 @@ int		check_sorted(t_arrays *array);
 void    find_min_moves_arr(t_arrays *array);
 int find_min_moves(t_arrays *array);
 void five_sort(t_arrays * array);
+void large_sort1(t_arrays *array);
 #endif
