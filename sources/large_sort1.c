@@ -17,20 +17,26 @@ void large_sort1(t_arrays *array){
 	nbr_of_groups = array->a_size/group_size + 1;
 	printf("group_size: %d\nnbr_of_groups: %d\n", group_size, nbr_of_groups);
 
-	while (array->b_size < group_size-1)
+	int curr_group = 0;
+	while (curr_group < nbr_of_groups)
 	{
-		if (/*(array->a[array->a_size] >= array->bubble_sort_arr[group_size *0]) && */(array->a[array->a_size] <= array->bubble_sort_arr[(group_size*(0+1))]))
-			pb(array);
-		else
-			rotatea(array);
-	}
-	while (array->b_size > -1)
-	{
+		while (array->b_size < group_size-1)
+		{
+			if ((array->a[array->a_size] <= array->bubble_sort_arr[(group_size*(curr_group))]) &&
+					(array->a[array->a_size] >= array->bubble_sort_arr[(group_size*(curr_group + 1))-1]))
+				pb(array);
+			else
+				rotatea(array);
+		}
 		int internal_ctr = 0;
-		if (array->b[array->b_size] == array->bubble_sort_arr[internal_ctr + group_size])
+		while (array->b_size > -1)
+		{
+			while (array->b[array->b_size] != array->bubble_sort_arr[internal_ctr + group_size*(curr_group)])
+				rotateb(array);
 			pa(array);
-		else 
-			rotateb(array);
+			internal_ctr++;
+		}
+		curr_group++;
 	}
 }
 
