@@ -10,9 +10,9 @@ void large_sort1(t_arrays *array){
 
 	int group_size = 0;
 	int nbr_of_groups = 0;
-	if (array->a_size > 50 && array->a_size % 25 == 0)
+	if ((array->a_size +1)> 50 && (array->a_size +1) % 25 == 0)
 		group_size = 25;
-	else if (array->a_size > 10/*&& array->a_size % 10 == 0*/)
+	else if ((array->a_size+1) > 10/*&& array->a_size % 10 == 0*/)
 		group_size = 10;
 	else
 		group_size = 5;
