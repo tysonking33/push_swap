@@ -16,11 +16,16 @@ void large_sort1(t_arrays *array){
 		group_size = 10;
 	else
 		group_size = 5;
-	nbr_of_groups = array->a_size/group_size + 1;
-	printf("group_size: %d\nnbr_of_groups: %d\n", group_size, nbr_of_groups);
-
+	
+	if ((array->a_size + 1) % group_size == 0)
+		nbr_of_groups = (array->a_size + 1)/group_size + 1;
+	else
+		nbr_of_groups = (array->a_size+1)/group_size + 2;
+	
+	int final_group_size = array->a_size % group_size;
+	printf("group_size: %d\nnbr_of_groups: %d\nfinal_group_size %d\n", group_size, nbr_of_groups, final_group_size);
 	int curr_group = 0;
-	while (curr_group < nbr_of_groups)
+	while (curr_group < nbr_of_groups - 2)
 	{
 		while (array->b_size < group_size-1)
 		{
@@ -39,6 +44,23 @@ void large_sort1(t_arrays *array){
 			internal_ctr++;
 		}
 		curr_group++;
+	}
+	//curr_group++;
+	while (array->b_size < final_group_size)
+	{
+		if ((array->a[array->a_size] <= array->bubble_sort_arr[(group_size*(curr_group))]) &&
+				(array->a[array->a_size] >= array->bubble_sort_arr[(group_size*(curr_group)) + final_group_size ]))
+			pb(array);
+		else
+			rotatea(array);
+	}
+	int internal_ctr = 0;
+	while (array->b_size > -1)
+	{
+		while (array->b[array->b_size] != array->bubble_sort_arr[internal_ctr + group_size*(curr_group)])
+			rotateb(array);
+		pa(array);
+		internal_ctr++;
 	}
 }
 
