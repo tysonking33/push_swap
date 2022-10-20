@@ -7,20 +7,25 @@ void large_sort2(t_arrays *array)
 	//int rem_size = array->a_size % 7;
 	int array1_start = array->a_size;
 	int array1_end = array->a_size - array->a_size/7;
-	int array2_start = array->a_size - array->a_size/7 + 1;
-	int array2_end = array->a_size - 2*(array->a_size)/7;
-	int array3_start = array->a_size - 2*(array->a_size)/7 + 1;
+	int array2_start = array->a_size - array->a_size/7 - 1;
+	int array2_end = array->a_size - 2*(array->a_size)/7 ;
+	int array3_start = array->a_size - 2*(array->a_size)/7 - 1;
 	int array3_end = array->a_size - 3*(array->a_size)/7;
-	int array4_start = array->a_size - 3*(array->a_size)/7 + 1;
+	int array4_start = array->a_size - 3*(array->a_size)/7 - 1;
 	int array4_end = array->a_size - 4*(array->a_size)/7;
-	int array5_start = array->a_size - 4*(array->a_size)/7 + 1;
+	int array5_start = array->a_size - 4*(array->a_size)/7 - 1;
 	int array5_end = array->a_size - 5*(array->a_size)/7;
-	int array6_start = array->a_size - 5*(array->a_size)/7 + 1;
+	int array6_start = array->a_size - 5*(array->a_size)/7 - 1;
 	int array6_end = array->a_size - 6*(array->a_size)/7;
-	int array7_start = array->a_size - 6*(array->a_size)/7 + 1;
+	int array7_start = array->a_size - 6*(array->a_size)/7 - 1;
 	int array7_end = array->a_size - 7*(array->a_size)/7;
-
-	int array8_start = array->a_size - 7*(array->a_size)/7 + 1;
+	
+	int array8_start;
+	//printf("array->a_size: %d\n", array->a_size);
+	if ((array->a_size + 1)% 7 == 0)
+		array8_start = 0;
+	else
+		array8_start = array->a_size - 7*(array->a_size)/7 - 1;
 	int array8_end = 0;
 	
 
@@ -29,13 +34,18 @@ void large_sort2(t_arrays *array)
 	printf("5_start: %d, 5_end: %d, 6_start %d, 6_end %d\n", array5_start, array5_end, array6_start, array6_end);
 	printf("7_start: %d, 7_end: %d, 8_start %d, 8_end %d\n", array7_start, array7_end, array8_start, array8_end);
 
+	array->completed_groups = 0;
+	array->sorted_end_idx = array->a_size - group_size * array->completed_groups;
+	array->first_time = 1;
 	array->rra_toggle = 0;
 	sort(array, array5_start, array5_end, group_size);
-	/*array->rra_toggle = 1;
+	array->first_time = 0;
+	array->rra_toggle = 1;
+	array->sorted_end_idx = array5_end - group_size;
 	sort(array, array6_start, array6_end, group_size);
 	array->rra_toggle = 0;
 	sort(array, array4_start, array4_end, group_size);
-	array->rra_toggle = 1;
+	/*array->rra_toggle = 1;
 	sort(array, array7_start, array7_end, group_size);
 	array->rra_toggle = 0;
 	sort(array, array3_start, array3_end, group_size);
@@ -49,38 +59,58 @@ void large_sort2(t_arrays *array)
 
 void sort(t_arrays *array, int start, int end, int array_size)
 {
-	//int counter = 0;
-	//int counter1 = array_size - 1;
+	array->completed_groups++;
+	if (array->first_time == 0)
+		array->sorted_end_idx = array->sorted_end_idx - array_size;
+	int counter = array_size;
+	int counter1 = 0;
 	while (array->b_size < array_size)
 	{
-		while ((array->a[array->a_size] > array->bubble_sort_arr[start])
-				&& (array->a[array->a_size] <  array->bubble_sort_arr[end]))
+		while (((array->a[array->a_size] < array->bubble_sort_arr[start])
+				|| (array->a[array->a_size] >  array->bubble_sort_arr[end]))
+				&& (array->rra_toggle == 0))
 		{
 			rotatea(array);
+		}
+		while (((array->a[array->a_size] < array->bubble_sort_arr[start])
+				|| (array->a[array->a_size] >  array->bubble_sort_arr[end]))
+				&& (array->rra_toggle == 1))
+		{
+			revrotatea(array);
 		}
 		pb(array);
 	}
 	printf("array->bubble_sort_arr[start]: %d\n", array->bubble_sort_arr[start]);
 	printf("array->bubble_sort_arr[end]: %d\n", array->bubble_sort_arr[end]);
-
-	/*while (array->b_size >= 0)
+	printf("array->bubble_sort_arr[start - counter1]: %d\n", array->bubble_sort_arr[start - counter1]);
+	if (array->first_time == 0)
+	{
+		int temp_end_idx = array->a_size - array->sorted_end_idx - 1;
+		printf("temp_end_idx %d\n", temp_end_idx);
+		while (temp_end_idx > 1)
+		{
+			revrotatea(array);
+			temp_end_idx--;
+		}
+	}
+	while (array->b_size > -1)
 	{
 		if (array->rra_toggle == 0)
 		{
-			while ((array->a[array->a_size] !=  array->bubble_sort_arr[start + counter])
-					&& (counter < array_size))
+			while ((array->b[array->b_size] !=  array->bubble_sort_arr[start - counter]))
 				rotateb(array);
 			pa(array);
-			counter++;
+			counter--;
 		}
 		else
 		{
-			while((array->a[array->a_size] !=  array->bubble_sort_arr[start + counter1])
-					&& (counter1 > -1))
+			while((array->b[array->b_size] !=  array->bubble_sort_arr[start - counter1]))
 				rotateb(array);
 			pa(array);
-			revrotatea(array);
-			counter1--;
+			rotatea(array);
+			counter1++;
 		}
-	}*/
+	}
+	
+
 }

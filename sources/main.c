@@ -48,6 +48,7 @@ int	main(int argc, char **argv)
 	}
 	else if ((array->a_size >= 3) && (sorted == 0))
 	{
+		//printf("okaok\n");
 		large_sort2(array);
 	}
 	//print_array(array, "final array");

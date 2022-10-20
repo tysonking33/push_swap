@@ -18,6 +18,10 @@ typedef struct s_arrays
 	int group_size;
 	int remainder_size;
 	int rra_toggle;
+	int first_time;
+	int sorted_start_idx;
+	int sorted_end_idx;
+	int completed_groups;
 }			t_arrays;
 
 void	pa(t_arrays *array);
