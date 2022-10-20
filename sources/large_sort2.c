@@ -34,8 +34,7 @@ void large_sort2(t_arrays *array)
 	printf("5_start: %d, 5_end: %d, 6_start %d, 6_end %d\n", array5_start, array5_end, array6_start, array6_end);
 	printf("7_start: %d, 7_end: %d, 8_start %d, 8_end %d\n", array7_start, array7_end, array8_start, array8_end);
 
-	array->completed_groups = 0;
-	array->sorted_end_idx = array->a_size - group_size * array->completed_groups;
+	array->sorted_end_idx = array->a_size;
 	array->first_time = 1;
 	array->rra_toggle = 0;
 	sort(array, array5_start, array5_end, group_size);
@@ -59,7 +58,6 @@ void large_sort2(t_arrays *array)
 
 void sort(t_arrays *array, int start, int end, int array_size)
 {
-	array->completed_groups++;
 	if (array->first_time == 0)
 		array->sorted_end_idx = array->sorted_end_idx - array_size;
 	int counter = array_size;
