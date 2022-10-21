@@ -22,6 +22,7 @@ typedef struct s_arrays
 	int sorted_start_idx;
 	int sorted_end_idx;
 	int completed_groups;
+	int completed_number;
 }			t_arrays;
 
 void	pa(t_arrays *array);
