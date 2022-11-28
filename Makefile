@@ -2,8 +2,6 @@ NAME = push_swap
 CC = gcc
 FLAGS = -Wall -Werror -Wextra -g
 RM = rm -f
-LINKS = -I./includes  -framework openGL \
-		-framework Appkit
 
 SRCS_DIR = sources/
 
