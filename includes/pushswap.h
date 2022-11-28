@@ -45,10 +45,10 @@ int		*bubble_sort(t_arrays *array);
 void    large_sort(t_arrays *array);
 int		check_sorted(t_arrays *array);
 void    find_min_moves_arr(t_arrays *array);
-int find_min_moves(t_arrays *array);
-void five_sort(t_arrays * array);
-void large_sort1(t_arrays *array);
-void large_sort2(t_arrays *array);
-int give_A_ele_find_A_position(t_arrays *array, int A_ele);
-void sort(t_arrays *array, int start, int end, int array_size);
+int		find_min_moves(t_arrays *array);
+void	five_sort(t_arrays * array);
+void	large_sort1(t_arrays *array);
+void	large_sort2(t_arrays *array);
+int		give_A_ele_find_A_position(t_arrays *array, int A_ele);
+void	sort(t_arrays *array, int start, int end, int array_size);
 #endif
