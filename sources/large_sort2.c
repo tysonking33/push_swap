@@ -4,7 +4,7 @@ void large_sort2(t_arrays *array)
 {
 	//make 8 groups, 1-7 is even, group 8 is remainder
 	int group_size = (array->a_size + 1) / 7;
-	int rem_size = (array->a_size + 1) % 7;
+	//int rem_size = (array->a_size + 1) % 7;
 	//printf("rem_size %d\n", rem_size);
 	int a1_start = array->a_size + 1;
 	int a1_end = array->a_size - group_size + 1;
@@ -67,92 +67,152 @@ void large_sort2(t_arrays *array)
 	}
 
 	array->completed_number = 0;
-	array->sorted_end_idx = array->a_size + 1;
+	
 	array->first_time = 1;
-	array->rra_toggle = 0;
+	array->ra_toggle = 0; //sorted_group at top
 	sort(array, a5_start, a5_end, group_size);
-	array->completed_number = 1;
+	
 	array->first_time = 0;
-	array->rra_toggle = 1;
+	array->ra_toggle = 1; //sorted_group at bottom
+	array->top_sort = array->bubble_sort_arr[a5_start];
+	array->bottom_sort = array->bubble_sort_arr[a5_end];
 	sort(array, a6_start, a6_end, group_size);
-	array->first_time = 0;
-	array->rra_toggle = 0;
+	
+	/*array->ra_toggle = 0;
+	array->bottom_sort = array->bubble_sort_arr[a6_end];
 	sort(array, a4_start, a4_end, group_size);
-	array->rra_toggle = 1;
+	
+	array->ra_toggle = 1;
+	array->top_sort = array->bubble_sort_arr[a4_start];
+
 	sort(array, a7_start, a7_end, group_size);
-	array->rra_toggle = 0;
+	
+	array->ra_toggle = 0;
 	sort(array, a3_start, a3_end, group_size);
 	if (rem_size != 0)
 	{
-		array->rra_toggle = 1;
+		array->ra_toggle = 1;
 		sort(array, a8_start, a8_end, rem_size);
 	}
-	array->rra_toggle = 0;
+	array->ra_toggle = 0;
 	array->first_time = 0;
-	/*sort(array, a2_start, a2_end, group_size);
+	sort(array, a2_start, a2_end, group_size);
 	sort(array, a1_start, a1_end, group_size);*/
 
 }
 
 void sort(t_arrays *array, int start, int end, int array_size)
 {
-	int ctr = 0;
-	//push to b
-	while (array->b_size < array_size)
+	if (array->first_time == 1)
 	{
-		if ((array->a[array->a_size] >= array->bubble_sort_arr[start])
-				&& (array->a[array->a_size] <= array->bubble_sort_arr[end]))
-			pb(array);
-		else
-			rotatea(array);
+		int ctr = 0;
+		//push to b
+		while (array->b_size < array_size - 1)
+		{
+			if ((array->a[array->a_size] > array->bubble_sort_arr[start])
+					&& (array->a[array->a_size] <= array->bubble_sort_arr[end]))
+				pb(array);
+			else
+				rotatea(array);
+		}
+
+		//push back to a
+		int move_ctr = 0;
+		while ((array->b_size > -1) && (array->ra_toggle == 0))
+		{
+			if ((array->b[array->b_size] == array->bubble_sort_arr[end + ctr]))
+			{
+				pa(array);
+				ctr++;
+				move_ctr++;
+			}
+			else 
+			{
+				rotateb(array);
+			}
+		}
+
+		//if ra_toggle == 1, move sorted_array to top
+		//else if ra_toggle == 0, move sorted_array to bottom
 	}
-
-	//push back to a
-	int move_ctr = 0;
-	while ((array->b_size > -1) && (array->rra_toggle == -0))
+	else if ((array->first_time == 0) && (array->ra_toggle == 1))
 	{
-		if ((array->b[array->b_size] == array->bubble_sort_arr[end + ctr]))
+		int ctr = 0;
+		int move_ctr = 0;
+		//push to b
+		while (array->b_size < array_size - 1)
 		{
-			pa(array);
-			ctr++;
-			move_ctr++;
+			if ((array->a[array->a_size] > array->bubble_sort_arr[start])
+					&& (array->a[array->a_size] <= array->bubble_sort_arr[end]))
+				pb(array);
+			else
+			{
+				revrotatea(array);
+				move_ctr++;
+			}
 		}
-		else 
-		{
-			rotateb(array);
-		}
-	}
-
-	
-
-	while ((array->b_size > -1) && (array->rra_toggle == 1))
-	{
-		if (array->b[array->b_size] == array->bubble_sort_arr[start - ctr])
-		{
-			pa(array);
-			ctr++;
-			rotatea(array);
-		}
-		else
-		{
-			rotateb(array);
-		}
-	}
-
-	if (array->rra_toggle == 0)
-	{
-		while (move_ctr <= array->a_size)
+		
+		//get sorted_array to bottom
+		while (array->a[0] != array->bottom_sort)
 		{
 			revrotatea(array);
-			move_ctr++;
+			printf("asdasdasdas\n");
 		}
+
+
+		//push back to a and push to bottom
+		while ((array->b_size > -1) && (array->ra_toggle == 1))
+		{
+			if ((array->b[array->b_size] == array->bubble_sort_arr[start - ctr - 1]))
+			{
+				pa(array);
+				rotatea(array);
+				ctr++;
+			}
+			else 
+			{
+				rotateb(array);
+			}
+		}
+		printf("current\n");
 	}
-	else if (array->rra_toggle == 1)
+	else if ((array->first_time == 0) && (array->ra_toggle == 0))
 	{
-		while (move_ctr <= array->a_size)
+		int ctr = 0;
+		int move_ctr = 0;
+		//push to b
+		while (array->b_size < array_size - 1)
+		{
+			if ((array->a[array->a_size] > array->bubble_sort_arr[start])
+					&& (array->a[array->a_size] <= array->bubble_sort_arr[end]))
+				pb(array);
+			else
+			{
+				rotatea(array);
+				move_ctr++;
+			}
+		}
+
+		//get sorted_array to top
+		while (array->a[array->a_size] != array->top_sort)
 		{
 			rotatea(array);
 			move_ctr++;
 		}
+
+		//push back to a
+		while ((array->b_size > -1) && (array->ra_toggle == 0))
+		{
+			if ((array->b[array->b_size] == array->bubble_sort_arr[end + ctr]))
+			{
+				pa(array);
+				ctr++;
+			}
+			else 
+			{
+				rotateb(array);
+			}
+		}
 	}
+	array->completed_number++;
 }

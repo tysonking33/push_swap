@@ -17,12 +17,14 @@ typedef struct s_arrays
 	int *a_and_b_moves;
 	int group_size;
 	int remainder_size;
-	int rra_toggle;
+	int ra_toggle;
 	int first_time;
 	int sorted_start_idx;
 	int sorted_end_idx;
 	int completed_groups;
 	int completed_number;
+	int top_sort;
+	int bottom_sort;
 }			t_arrays;
 
 void	pa(t_arrays *array);
