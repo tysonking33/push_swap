@@ -74,9 +74,11 @@ void large_sort2(t_arrays *array)
 	
 	array->first_time = 0;
 	array->ra_toggle = 1; //sorted_group at bottom
-	array->top_sort = array->bubble_sort_arr[a5_start];
+	array->top_sort = array->bubble_sort_arr[a5_start - 1];
 	array->bottom_sort = array->bubble_sort_arr[a5_end];
+	printf("array->top_sort = %d, array->bottom_sort = %d\n", array->top_sort, array->bottom_sort);
 	sort(array, a6_start, a6_end, group_size);
+
 	
 	/*array->ra_toggle = 0;
 	array->bottom_sort = array->bubble_sort_arr[a6_end];
@@ -137,8 +139,9 @@ void sort(t_arrays *array, int start, int end, int array_size)
 	}
 	else if ((array->first_time == 0) && (array->ra_toggle == 1))
 	{
-		int ctr = 0;
-		int move_ctr = 0;
+		printf("array->bottom_sort = %d\n", array->bottom_sort);
+
+		//int ctr = 0;
 		//push to b
 		while (array->b_size < array_size - 1)
 		{
@@ -148,15 +151,20 @@ void sort(t_arrays *array, int start, int end, int array_size)
 			else
 			{
 				revrotatea(array);
-				move_ctr++;
+				printf("array->bottom_sort = %d\n", array->bottom_sort);
 			}
+
+
 		}
+
+		//printf("array->bottom_sort = %d\n", array->bottom_sort);
+
 		
 		//get sorted_array to bottom
-		while (array->a[0] != array->bottom_sort)
+		/*while (array->a[0] != array->bottom_sort)
 		{
 			revrotatea(array);
-			printf("asdasdasdas\n");
+			printf("array->bottom_sort = %d\n", array->bottom_sort);
 		}
 
 
@@ -174,7 +182,7 @@ void sort(t_arrays *array, int start, int end, int array_size)
 				rotateb(array);
 			}
 		}
-		printf("current\n");
+		printf("current\n");*/
 	}
 	else if ((array->first_time == 0) && (array->ra_toggle == 0))
 	{
