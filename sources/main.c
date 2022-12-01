@@ -28,9 +28,9 @@ int	main(int argc, char **argv)
 	swapa(array);*/
 	//a->size is the top index e.g. a[2] = a->a_size = 2
 	
-	//rintf("array->a_size: %d\n", array->a_size);
+	//printf("array->a_size: %d\n", array->a_size);
 
-	/*if ((array->a_size == 1) && (sorted == 0))
+	if ((array->a_size == 1) && (sorted == 0))
 	{
 		swapa(array);
 	}
@@ -46,9 +46,8 @@ int	main(int argc, char **argv)
 	{
 		//printf("okaok\n");
 		large_sort2(array);
-	}*/
+	}
 
-	rotatea(array);
 
 	//print_array(array, "final array");
 	//sorted = check_sorted(array);
