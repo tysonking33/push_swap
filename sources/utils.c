@@ -79,7 +79,7 @@ void	print_array(t_arrays *array, char *move_type)
 		i = array->a_size;*/
 	i = array->a_size + array->b_size + 1;
 	printf("%s: Step number:%d\n", move_type, array->step_count);
-	printf("a_size: %d, b_size: %d, 				bubble sort_arr\n", array->a_size, array->b_size);
+	printf("a_size: %d, b_size: %d, 			bubble sort_arr\n", array->a_size, array->b_size);
 	printf("stackA			stackB\n");
 	while(i > -1)
 	{

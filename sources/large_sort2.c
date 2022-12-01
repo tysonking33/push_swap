@@ -1,5 +1,8 @@
 #include "../includes/pushswap.h"
 
+//array->group_info.ra_toggle = 1; //sorted_group at bottom
+//array->group_info.ra_toggle = 0; //sorted_group at top
+
 void large_sort2(t_arrays *array)
 {
 	//make 8 groups, 1-7 is even, group 8 is remainder
@@ -71,36 +74,31 @@ void large_sort2(t_arrays *array)
 	array->group_info.ra_toggle = 0; //sorted_group at top
 	sort(array, array->pos.a5_start, array->pos.a5_end, array->group_info.group_size);
 	
-	/*array->group_info.first_time = 0;
-	array->group_info.ra_toggle = 1; //sorted_group at bottom
+	array->group_info.first_time = 0;
 	array->group_info.top_sort = array->bubble_sort_arr[array->pos.a5_start - 1];
 	array->group_info.bottom_sort = array->bubble_sort_arr[array->pos.a5_end];
 	printf("array->bottom_sort: %d\n", array->group_info.bottom_sort);
 
 	printf("array->top_sort: %d, array->bottom_sort: %d\n", array->group_info.top_sort, array->group_info.bottom_sort);
-	sort(array, array->pos.a6_start, array->pos.a6_end, array->group_info.group_size);*/
+	sort(array, array->pos.a6_start, array->pos.a6_end, array->group_info.group_size);
 
 	
-	/*array->ra_toggle = 0;
-	array->bottom_sort = array->bubble_sort_arr[a6_end];
-	sort(array, a4_start, a4_end, array->group_info.group_size);
+	array->group_info.bottom_sort = array->bubble_sort_arr[array->pos.a6_end];
+	sort(array, array->pos.a4_start, array->pos.a4_end, array->group_info.group_size);
 	
-	array->ra_toggle = 1;
-	array->top_sort = array->bubble_sort_arr[a4_start];
-
-	sort(array, a7_start, a7_end, array->group_info.group_size);
+	array->group_info.top_sort = array->bubble_sort_arr[array->pos.a4_start];
+	sort(array, array->pos.a7_start, array->pos.a7_end, array->group_info.group_size);
 	
-	array->ra_toggle = 0;
-	sort(array, a3_start, a3_end, array->group_info.group_size);
-	if (rem_size != 0)
+	/*
+	array->group_info.bottom_sort = array->bubble_sort_arr[array->pos.a7_end];
+	sort(array, array->pos.a3_start, array->pos.a3_end, array->group_info.group_size);
+	if (array->group_info.rem_size != 0)
 	{
-		array->ra_toggle = 1;
-		sort(array, a8_start, a8_end, rem_size);
+		array->group_info.ra_toggle = 1;
+		sort(array, array->pos.a8_start, array->pos.a8_end, array->group_info.rem_size);
 	}
-	array->ra_toggle = 0;
-	array->first_time = 0;
-	sort(array, a2_start, a2_end, array->group_info.group_size);
-	sort(array, a1_start, a1_end, array->group_info.group_size);*/
+	sort(array, array->pos.a2_start, array->pos.a2_end, array->group_info.group_size);
+	sort(array, array->pos.a1_start, array->pos.a1_end, array->group_info.group_size);*/
 
 }
 
@@ -111,7 +109,7 @@ void sort(t_arrays *array, int start, int end, int array_size)
 		/*printf("array->b_size: %d, array_size: %d\n", array->b_size, array_size);
 		printf("array->bubble_sort_arr[start]: %d, array->bubble_sort_arr[end]: %d\n", array->bubble_sort_arr[start - 1], array->bubble_sort_arr[end]);*/
 		//push to b
-		while (array->b_size < array_size)
+		while (array->b_size < array_size - 1)
 		{
 			if ((array->a[array->a_size] >= array->bubble_sort_arr[start - 1])
 					&& (array->a[array->a_size] <= array->bubble_sort_arr[end]))
@@ -121,7 +119,7 @@ void sort(t_arrays *array, int start, int end, int array_size)
 		}
 
 
-		/*//push back to a
+		//push back to a
 		int move_ctr = 0;
 		int ctr = 0;
 		while ((array->b_size > -1) && (array->group_info.ra_toggle == 0))
@@ -136,7 +134,7 @@ void sort(t_arrays *array, int start, int end, int array_size)
 			{
 				rotateb(array);
 			}
-		}*/
+		}
 
 		//if ra_toggle == 1, move sorted_array to top
 		//else if ra_toggle == 0, move sorted_array to bottom
@@ -164,7 +162,7 @@ void sort(t_arrays *array, int start, int end, int array_size)
 
 		
 		//get sorted_array to bottom
-		/*while (array->a[0] != array->group_info.bottom_sort)
+		while (array->a[0] != array->group_info.bottom_sort)
 		{
 			revrotatea(array);
 			printf("array->group_info.bottom_sort = %d\n", array->group_info.bottom_sort);
@@ -186,7 +184,7 @@ void sort(t_arrays *array, int start, int end, int array_size)
 				rotateb(array);
 			}
 		}
-		printf("current\n");*/
+		printf("current\n");
 	}
 	else if ((array->group_info.first_time == 0) && (array->group_info.ra_toggle == 0))
 	{
@@ -227,4 +225,8 @@ void sort(t_arrays *array, int start, int end, int array_size)
 		}
 	}
 	array->group_info.completed_number++;
+	if (array->group_info.ra_toggle == 1)
+		array->group_info.ra_toggle = 0;
+	else if (array->group_info.ra_toggle == 0)
+		array->group_info.ra_toggle = 1;
 }
