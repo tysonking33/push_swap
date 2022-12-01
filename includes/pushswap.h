@@ -51,9 +51,7 @@ typedef struct s_arrays
 
 	t_postion pos;
 	t_grp_info group_info;
-	
-
-}			t_arrays;
+}				t_arrays;
 
 void	pa(t_arrays *array);
 void	pb(t_arrays *array);

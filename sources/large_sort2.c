@@ -89,16 +89,20 @@ void large_sort2(t_arrays *array)
 	array->group_info.top_sort = array->bubble_sort_arr[array->pos.a4_start];
 	sort(array, array->pos.a7_start, array->pos.a7_end, array->group_info.group_size);
 	
-	/*
+	
 	array->group_info.bottom_sort = array->bubble_sort_arr[array->pos.a7_end];
+	array->group_info.top_sort = array->bubble_sort_arr[array->pos.a4_start - 1];
 	sort(array, array->pos.a3_start, array->pos.a3_end, array->group_info.group_size);
 	if (array->group_info.rem_size != 0)
 	{
 		array->group_info.ra_toggle = 1;
 		sort(array, array->pos.a8_start, array->pos.a8_end, array->group_info.rem_size);
 	}
+	array->group_info.ra_toggle = 0;
 	sort(array, array->pos.a2_start, array->pos.a2_end, array->group_info.group_size);
-	sort(array, array->pos.a1_start, array->pos.a1_end, array->group_info.group_size);*/
+	array->group_info.ra_toggle = 0;
+
+	sort(array, array->pos.a1_start, array->pos.a1_end, array->group_info.group_size);
 
 }
 
@@ -184,7 +188,6 @@ void sort(t_arrays *array, int start, int end, int array_size)
 				rotateb(array);
 			}
 		}
-		printf("current\n");
 	}
 	else if ((array->group_info.first_time == 0) && (array->group_info.ra_toggle == 0))
 	{
@@ -207,6 +210,9 @@ void sort(t_arrays *array, int start, int end, int array_size)
 		while (array->a[array->a_size] != array->group_info.top_sort)
 		{
 			rotatea(array);
+			printf("current\n");
+			printf("array->group_info.top_sort: %d\n\n", array->group_info.top_sort);
+
 			move_ctr++;
 		}
 
@@ -223,8 +229,10 @@ void sort(t_arrays *array, int start, int end, int array_size)
 				rotateb(array);
 			}
 		}
+
 	}
 	array->group_info.completed_number++;
+	
 	if (array->group_info.ra_toggle == 1)
 		array->group_info.ra_toggle = 0;
 	else if (array->group_info.ra_toggle == 0)
