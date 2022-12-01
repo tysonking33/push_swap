@@ -30,13 +30,9 @@ int	main(int argc, char **argv)
 	
 	//rintf("array->a_size: %d\n", array->a_size);
 
-	if ((array->a_size == 1) && (sorted == 0))
+	/*if ((array->a_size == 1) && (sorted == 0))
 	{
 		swapa(array);
-		/*
-		if (array->a[2] > array->a[1])
-			swapa(array);
-		print_array(array, "complete 2 sort");*/
 	}
 	else if ((array->a_size == 2) && (sorted == 0))
 	{
@@ -50,7 +46,10 @@ int	main(int argc, char **argv)
 	{
 		//printf("okaok\n");
 		large_sort2(array);
-	}
+	}*/
+
+	rotatea(array);
+
 	//print_array(array, "final array");
 	//sorted = check_sorted(array);
 	//printf("sorted: %d\n", sorted);

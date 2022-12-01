@@ -73,16 +73,17 @@ void	print_array(t_arrays *array, char *move_type)
 {
 	int i;
 
-	if (array->b_size > array->a_size)
+	/*if (array->b_size > array->a_size)
 		i = array->b_size;
 	else
-		i = array->a_size;
+		i = array->a_size;*/
+	i = array->a_size + array->b_size + 1;
 	printf("%s: Step number:%d\n", move_type, array->step_count);
-	printf("a_size: %d, b_size: %d\n", array->a_size, array->b_size);
+	printf("a_size: %d, b_size: %d, 				bubble sort_arr\n", array->a_size, array->b_size);
 	printf("stackA			stackB\n");
 	while(i > -1)
 	{
-		printf("[%d]:%d			[%d]:%d\n", i, array->a[i], i, array->b[i]);
+		printf("[%d]:%d			[%d]:%d			[%d]:%d\n", i, array->a[i], i, array->b[i], i, array->bubble_sort_arr[i]);
 		i--;
 	}
 	printf("[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]\n\n");
@@ -95,4 +96,20 @@ void	ft_ibzero(t_arrays *array)
 	
 	while (i--)
 		array->b[i] = 0;
+}
+
+void	make_zero(t_arrays *array, char arr)
+{
+	int i;
+	i = 0;
+	while ((i <= array->a_size) && (arr == 'a'))
+	{
+		array->a[i] = 0;
+		i++;
+	}
+	while ((i <= array->b_size) && (arr == 'b'))
+	{
+		array->b[i] = 0;
+		i++;
+	}
 }

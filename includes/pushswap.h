@@ -5,6 +5,39 @@
 #include <unistd.h>
 #include <stdlib.h>
 
+typedef struct s_grp_info
+{
+	int group_size;
+	int rem_size;
+	int ra_toggle;
+	int first_time;
+	int sorted_start_idx;
+	int sorted_end_idx;
+	int completed_number;
+	int top_sort;
+	int bottom_sort;
+}				t_grp_info;
+
+typedef struct s_position
+{
+	int a1_start;
+	int a1_end;
+	int a2_start;
+	int a2_end;
+	int a3_start;
+	int a3_end;
+	int a4_start;
+	int a4_end;
+	int a5_start;
+	int a5_end;
+	int a6_start;
+	int a6_end;
+	int a7_start;
+	int a7_end;
+	int a8_start;
+	int a8_end;
+}				t_postion;
+
 typedef struct s_arrays
 {
 	int	*a;
@@ -15,16 +48,11 @@ typedef struct s_arrays
 	int	*bubble_sort_arr;
 	int	*b_moves;
 	int *a_and_b_moves;
-	int group_size;
-	int remainder_size;
-	int ra_toggle;
-	int first_time;
-	int sorted_start_idx;
-	int sorted_end_idx;
-	int completed_groups;
-	int completed_number;
-	int top_sort;
-	int bottom_sort;
+
+	t_postion pos;
+	t_grp_info group_info;
+	
+
 }			t_arrays;
 
 void	pa(t_arrays *array);
@@ -53,4 +81,5 @@ void	large_sort1(t_arrays *array);
 void	large_sort2(t_arrays *array);
 int		give_A_ele_find_A_position(t_arrays *array, int A_ele);
 void	sort(t_arrays *array, int start, int end, int array_size);
+void	make_zero(t_arrays *array, char arr);
 #endif
