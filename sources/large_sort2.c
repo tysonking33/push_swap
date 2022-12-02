@@ -24,11 +24,10 @@ void large_sort2(t_arrays *array)
 	array->pos.a7_start = array->a_size - (6 * array->group_info.group_size) + 1;
 	array->pos.a7_end = array->a_size - (7 * array->group_info.group_size) + 1;
 	
-	//printf("array->a_size: %d\n", array->a_size);
 	if ((array->a_size + 1)% 7 == 0)
 		array->pos.a8_start = 0;
 	else
-		array->pos.a8_start = array->a_size - 7 * (array->a_size) / 7 + 6;
+		array->pos.a8_start = array->a_size - (7 * array->group_info.group_size) + 1;
 	array->pos.a8_end = 0;
 	
 	{
@@ -77,17 +76,19 @@ void large_sort2(t_arrays *array)
 	array->group_info.first_time = 0;
 	array->group_info.top_sort = array->bubble_sort_arr[array->pos.a5_start - 1];
 	array->group_info.bottom_sort = array->bubble_sort_arr[array->pos.a5_end];
-	printf("array->bottom_sort: %d\n", array->group_info.bottom_sort);
-	printf("array->top_sort: %d, array->bottom_sort: %d\n", array->group_info.top_sort, array->group_info.bottom_sort);
 	sort(array, array->pos.a6_start, array->pos.a6_end, array->group_info.group_size);
+
 
 	
 	array->group_info.bottom_sort = array->bubble_sort_arr[array->pos.a6_end];
 	sort(array, array->pos.a4_start, array->pos.a4_end, array->group_info.group_size);
-	
+
+
+
 	array->group_info.top_sort = array->bubble_sort_arr[array->pos.a4_start];
 	sort(array, array->pos.a7_start, array->pos.a7_end, array->group_info.group_size);
 	
+
 	
 	array->group_info.bottom_sort = array->bubble_sort_arr[array->pos.a7_end];
 	array->group_info.top_sort = array->bubble_sort_arr[array->pos.a4_start - 1];
@@ -99,9 +100,11 @@ void large_sort2(t_arrays *array)
 		array->group_info.ra_toggle = 1;
 		sort(array, array->pos.a8_start, array->pos.a8_end, array->group_info.rem_size);
 	}
-	
+
+
 	array->group_info.ra_toggle = 0;
 	sort(array, array->pos.a2_start, array->pos.a2_end, array->group_info.group_size);
+
 	array->group_info.ra_toggle = 0;
 	sort(array, array->pos.a1_start, array->pos.a1_end, array->group_info.group_size);
 
@@ -111,8 +114,6 @@ void sort(t_arrays *array, int start, int end, int array_size)
 {
 	if (array->group_info.first_time == 1)
 	{
-		/*printf("array->b_size: %d, array_size: %d\n", array->b_size, array_size);
-		printf("array->bubble_sort_arr[start]: %d, array->bubble_sort_arr[end]: %d\n", array->bubble_sort_arr[start - 1], array->bubble_sort_arr[end]);*/
 		//push to b
 		while (array->b_size < array_size - 1)
 		{
@@ -146,7 +147,6 @@ void sort(t_arrays *array, int start, int end, int array_size)
 	}
 	else if ((array->group_info.first_time == 0) && (array->group_info.ra_toggle == 1))
 	{
-		printf("array->bottom_sort: %d\n", array->group_info.bottom_sort);
 
 		//push to b
 		while (array->b_size < array_size - 1)
@@ -157,20 +157,13 @@ void sort(t_arrays *array, int start, int end, int array_size)
 			else
 			{
 				revrotatea(array);
-				printf("array->bottom_sort: %d\n\n", array->group_info.bottom_sort);
 			}
 		}
-		printf("array->bottom_sort: %d\n\n", array->group_info.bottom_sort);
-
-
-		//printf("array->group_info.bottom_sort = %d\n", array->group_info.bottom_sort);
-
 		
 		//get sorted_array to bottom
 		while (array->a[0] != array->group_info.bottom_sort)
 		{
 			revrotatea(array);
-			printf("array->group_info.bottom_sort = %d\n", array->group_info.bottom_sort);
 		}
 
 		int ctr = 0;
@@ -211,9 +204,6 @@ void sort(t_arrays *array, int start, int end, int array_size)
 		while (array->a[array->a_size] != array->group_info.top_sort)
 		{
 			rotatea(array);
-			printf("current\n");
-			printf("array->group_info.top_sort: %d\n\n", array->group_info.top_sort);
-
 			move_ctr++;
 		}
 
