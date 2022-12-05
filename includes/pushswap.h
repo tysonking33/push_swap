@@ -82,6 +82,7 @@ void	sort(t_arrays *array, int start, int end, int array_size);
 void	make_zero(t_arrays *array, char arr);
 int		find_b_max_position(t_arrays *array);
 void 	rotateb_or_revrotateb(t_arrays *array);
+int		find_b_min_pos(t_arrays *array);
 
 
 #endif
