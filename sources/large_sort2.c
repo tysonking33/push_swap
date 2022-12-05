@@ -73,14 +73,14 @@ void large_sort2(t_arrays *array)
 	array->group_info.ra_toggle = 0; //sorted_group at top
 	sort(array, array->pos.a5_start, array->pos.a5_end, array->group_info.group_size);
 	
-	array->group_info.first_time = 0;
+	/*array->group_info.first_time = 0;
 	array->group_info.top_sort = array->bubble_sort_arr[array->pos.a5_start - 1];
 	array->group_info.bottom_sort = array->bubble_sort_arr[array->pos.a5_end];
-	sort(array, array->pos.a6_start, array->pos.a6_end, array->group_info.group_size);
+	sort(array, array->pos.a6_start, array->pos.a6_end, array->group_info.group_size);*/
 
 
 	
-	array->group_info.bottom_sort = array->bubble_sort_arr[array->pos.a6_end];
+	/*array->group_info.bottom_sort = array->bubble_sort_arr[array->pos.a6_end];
 	sort(array, array->pos.a4_start, array->pos.a4_end, array->group_info.group_size);
 
 
@@ -107,12 +107,13 @@ void large_sort2(t_arrays *array)
 
 	array->group_info.top_sort = array->bubble_sort_arr[array->pos.a2_start - 1];
 	array->group_info.ra_toggle = 0;
-	sort(array, array->pos.a1_start, array->pos.a1_end, array->group_info.group_size);
+	sort(array, array->pos.a1_start, array->pos.a1_end, array->group_info.group_size);*/
 
 }
 
 void sort(t_arrays *array, int start, int end, int array_size)
 {
+	printf("array_size: %d", array_size);
 	if (array->group_info.first_time == 1)
 	{
 		//push to b
@@ -127,7 +128,6 @@ void sort(t_arrays *array, int start, int end, int array_size)
 
 
 		//push back to a
-		int move_ctr = 0;
 		int ctr = 0;
 		while ((array->b_size > -1) && (array->group_info.ra_toggle == 0))
 		{
@@ -135,13 +135,13 @@ void sort(t_arrays *array, int start, int end, int array_size)
 			{
 				pa(array);
 				ctr++;
-				move_ctr++;
 			}
 			else 
 			{
-				rotateb(array);
+				rotateb_or_revrotateb(array);
 			}
 		}
+
 
 		//if ra_toggle == 1, move sorted_array to top
 		//else if ra_toggle == 0, move sorted_array to bottom
@@ -180,14 +180,12 @@ void sort(t_arrays *array, int start, int end, int array_size)
 			}
 			else 
 			{
-				rotateb(array);
+				rotateb_or_revrotateb(array);
 			}
 		}
 	}
 	else if ((array->group_info.first_time == 0) && (array->group_info.ra_toggle == 0))
 	{
-		int ctr = 0;
-		int move_ctr = 0;
 		//push to b
 		while (array->b_size < array_size - 1)
 		{
@@ -197,7 +195,6 @@ void sort(t_arrays *array, int start, int end, int array_size)
 			else
 			{
 				rotatea(array);
-				move_ctr++;
 			}
 		}
 
@@ -205,10 +202,10 @@ void sort(t_arrays *array, int start, int end, int array_size)
 		while (array->a[array->a_size] != array->group_info.top_sort)
 		{
 			rotatea(array);
-			move_ctr++;
 		}
 
 		//push back to a
+		int ctr = 0;
 		while ((array->b_size > -1) && (array->group_info.ra_toggle == 0))
 		{
 			if ((array->b[array->b_size] == array->bubble_sort_arr[end + ctr]))
@@ -218,15 +215,16 @@ void sort(t_arrays *array, int start, int end, int array_size)
 			}
 			else 
 			{
-				rotateb(array);
+				rotateb_or_revrotateb(array);
 			}
 		}
-
 	}
+
 	array->group_info.completed_number++;
 	
 	if (array->group_info.ra_toggle == 1)
 		array->group_info.ra_toggle = 0;
 	else if (array->group_info.ra_toggle == 0)
 		array->group_info.ra_toggle = 1;
+	
 }
