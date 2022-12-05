@@ -16,6 +16,7 @@ FILES = push \
 		large_sort1 \
 		large_sort2 \
 		search_arrayA \
+		utils2 \
 
 SRCS = $(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES)))
 OBJS = $(SRCS:.c=.o)
