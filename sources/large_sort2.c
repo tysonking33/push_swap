@@ -7,8 +7,7 @@ void large_sort2(t_arrays *array)
 {
 	//make 8 groups, 1-7 is even, group 8 is remainder
 	array->group_info.group_size = (array->a_size + 1) / 7;
-	//int rem_size = (array->a_size + 1) % 7;
-	//printf("rem_size %d\n", rem_size);
+	array->group_info.rem_size = (array->a_size + 1) % 7;
 	array->pos.a1_start = array->a_size + 1;
 	array->pos.a1_end = array->a_size - array->group_info.group_size + 1;
 	array->pos.a2_start = array->a_size - (array->group_info.group_size) + 1;
@@ -78,17 +77,14 @@ void large_sort2(t_arrays *array)
 	array->group_info.bottom_sort = array->bubble_sort_arr[array->pos.a5_end];
 	sort(array, array->pos.a6_start, array->pos.a6_end, array->group_info.group_size);
 
-
 	
 	array->group_info.bottom_sort = array->bubble_sort_arr[array->pos.a6_end];
 	sort(array, array->pos.a4_start, array->pos.a4_end, array->group_info.group_size);
 
 
-
 	array->group_info.top_sort = array->bubble_sort_arr[array->pos.a4_start];
 	sort(array, array->pos.a7_start, array->pos.a7_end, array->group_info.group_size);
 	
-
 	
 	array->group_info.bottom_sort = array->bubble_sort_arr[array->pos.a7_end];
 	array->group_info.top_sort = array->bubble_sort_arr[array->pos.a4_start - 1];
