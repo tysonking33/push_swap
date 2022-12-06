@@ -49,21 +49,23 @@ void rotateb_or_revrotateb(t_arrays *array)
 {
     int target_b_idx;
     int target_ele;
-
+	
+	target_b_idx = 0;
+	target_ele = 0;
     if (array->group_info.ra_toggle == 0)
         target_b_idx = find_b_max_position(array);
     else if (array->group_info.ra_toggle == 1)
         target_b_idx = find_b_min_pos(array);
 
     target_ele = array->b[target_b_idx];
-    if (target_b_idx >= array->b_size / 2)
+    if (target_b_idx > array->b_size / 2)
     {
         while (array->b[array->b_size] != target_ele)
         {
             revrotateb(array);
         }
     }
-    else if (target_b_idx < array->b_size / 2)
+    else if (target_b_idx <= array->b_size / 2)
     {
         while (array->b[array->b_size] != target_ele)
         {

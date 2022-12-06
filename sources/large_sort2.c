@@ -129,7 +129,7 @@ void sort(t_arrays *array, int start, int end, int array_size)
 		int ctr = 0;
 		while ((array->b_size > -1) && (array->group_info.ra_toggle == 0))
 		{
-			if ((array->b[array->b_size] == array->bubble_sort_arr[end + ctr]))
+			if ((array->b[array->b_size]) == (array->bubble_sort_arr[end + ctr]))
 			{
 				pa(array);
 				ctr++;
@@ -167,7 +167,7 @@ void sort(t_arrays *array, int start, int end, int array_size)
 		// push back to a and push to bottom
 		while ((array->b_size > -1) && (array->group_info.ra_toggle == 1))
 		{
-			if ((array->b[array->b_size] == array->bubble_sort_arr[start - ctr - 1]))
+			if ((array->b[array->b_size]) == (array->bubble_sort_arr[start - ctr - 1]))
 			{
 				pa(array);
 				rotatea(array);
@@ -202,7 +202,7 @@ void sort(t_arrays *array, int start, int end, int array_size)
 		int ctr = 0;
 		while ((array->b_size > -1) && (array->group_info.ra_toggle == 0))
 		{
-			if ((array->b[array->b_size] == array->bubble_sort_arr[end + ctr]))
+			if ((array->b[array->b_size]) == (array->bubble_sort_arr[end + ctr]))
 			{
 				pa(array);
 				ctr++;
