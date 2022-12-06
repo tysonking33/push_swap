@@ -1,5 +1,35 @@
 #include "../includes/pushswap.h"
 
+int 	find_min_idx(t_arrays *array)
+{
+    int curr_min_ele;
+    int curr_min_idx;
+    int ctr;
+
+    curr_min_ele = 9999999;
+    curr_min_idx = 0;
+    ctr = 0;
+    while ((ctr < 10) && (array->group_info.find_top == 1))
+    {
+        if (array->group_info.top_arr[ctr] < curr_min_ele)
+        {
+            curr_min_idx = ctr;
+            curr_min_ele = array->group_info.top_arr[ctr];
+        }
+        ctr++;
+    }
+    while ((ctr < 10) && (array->group_info.find_top == 0))
+    {
+        if (array->group_info.top_arr[ctr] < curr_min_ele)
+        {
+            curr_min_idx = ctr;
+            curr_min_ele = array->group_info.bottom_arr[ctr];
+        }
+        ctr++;
+    }
+    return curr_min_idx;
+}
+
 int find_b_max_position(t_arrays *array)
 {
     int curr_max_ele;
@@ -73,4 +103,49 @@ void rotateb_or_revrotateb(t_arrays *array)
         }
     }
 
+}
+void print_grp_ele(t_arrays *array)
+{
+    printf("testing\n");
+    printf("\ngroup 1\n");
+    for (int i = array->pos.a1_end; i < array->pos.a1_start; i++)
+    {
+        printf("%d, ", array->bubble_sort_arr[i]);
+    }
+    printf("\ngroup 2\n");
+    for (int i = array->pos.a2_end; i < array->pos.a2_start; i++)
+    {
+        printf("%d, ", array->bubble_sort_arr[i]);
+    }
+    printf("\ngroup 3\n");
+    for (int i = array->pos.a3_end; i < array->pos.a3_start; i++)
+    {
+        printf("%d, ", array->bubble_sort_arr[i]);
+    }
+    printf("\ngroup 4\n");
+    for (int i = array->pos.a4_end; i < array->pos.a4_start; i++)
+    {
+        printf("%d, ", array->bubble_sort_arr[i]);
+    }
+    printf("\ngroup 5\n");
+    for (int i = array->pos.a5_end; i < array->pos.a5_start; i++)
+    {
+        printf("%d, ", array->bubble_sort_arr[i]);
+    }
+    printf("\ngroup 6\n");
+    for (int i = array->pos.a6_end; i < array->pos.a6_start; i++)
+    {
+        printf("%d, ", array->bubble_sort_arr[i]);
+    }
+    printf("\ngroup 7\n");
+    for (int i = array->pos.a7_end; i < array->pos.a7_start; i++)
+    {
+        printf("%d, ", array->bubble_sort_arr[i]);
+    }
+    printf("\ngroup 8\n");
+    for (int i = array->pos.a8_end; i < array->pos.a8_start; i++)
+    {
+        printf("%d, ", array->bubble_sort_arr[i]);
+    }
+    printf("\n");
 }

@@ -16,7 +16,10 @@ typedef struct s_grp_info
 	int completed_number;
 	int top_sort;
 	int bottom_sort;
-	int top_bottom_array[2][10];
+	int top_bottom_array[2][8];
+	int bottom_arr[8];
+	int top_arr[8];
+	int find_top;
 }				t_grp_info;
 
 typedef struct s_position
@@ -37,12 +40,14 @@ typedef struct s_position
 	int a7_end;
 	int a8_start;
 	int a8_end;
-	int a9_start;
-	int a9_end;
-	int a10_start;
-	int a10_end;
+}				t_position;
 
-}				t_postion;
+typedef struct s_current_group
+{
+	int start;
+	int end;
+	int grp_size;
+}				t_current_group;
 
 typedef struct s_arrays
 {
@@ -55,8 +60,9 @@ typedef struct s_arrays
 	int	*b_moves;
 	int *a_and_b_moves;
 
-	t_postion pos;
+	t_position pos;
 	t_grp_info group_info;
+	t_current_group curr_grp;
 }				t_arrays;
 
 void	pa(t_arrays *array);
@@ -89,6 +95,12 @@ void	make_zero(t_arrays *array, char arr);
 int		find_b_max_position(t_arrays *array);
 void 	rotateb_or_revrotateb(t_arrays *array);
 int		find_b_min_pos(t_arrays *array);
-
+void	sort_group(t_arrays *array);
+void find_bottom_or_top_most_idx(t_arrays *array, int start, int end, int array_size);
+void	print_grp_ele(t_arrays *array);
+void make_groups(t_arrays *array);
+int find_groups(t_arrays *array);
+int 	find_min_idx(t_arrays *array);
+void sel_curr(t_arrays *array, int grp_idx);
 
 #endif
