@@ -19,16 +19,6 @@ int	main(int argc, char **argv)
 
 	if ((!array->a) || (!array->b))
 		error("malloc");
-	/*testing
-	pb(array);
-	pb(array);
-	pa(array);
-	rotatea(array);
-	revrotatea(array);
-	swapa(array);*/
-	//a->size is the top index e.g. a[2] = a->a_size = 2
-	
-	//printf("array->a_size: %d\n", array->a_size);
 
 	if ((array->a_size == 1) && (sorted == 0))
 	{
@@ -44,14 +34,10 @@ int	main(int argc, char **argv)
 	}
 	else if ((array->a_size >= 3) && (sorted == 0))
 	{
-		//printf("okaok\n");
 		large_sort2(array);
 	}
 
-
-	//print_array(array, "final array");
-	//sorted = check_sorted(array);
-	//printf("sorted: %d\n", sorted);
+	print_array(array, "final array");
 	return 0;
 }
 

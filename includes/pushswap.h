@@ -70,19 +70,9 @@ void	swapb(t_arrays *array);
 void	sim_swap(t_arrays *array);
 void    small_med_large(t_arrays *array);
 int		*bubble_sort(t_arrays *array);
-void    large_sort(t_arrays *array);
 int		check_sorted(t_arrays *array);
-void    find_min_moves_arr(t_arrays *array);
-int		find_min_moves(t_arrays *array);
 void	five_sort(t_arrays * array);
-void	large_sort1(t_arrays *array);
 void	large_sort2(t_arrays *array);
-int		give_A_ele_find_A_position(t_arrays *array, int A_ele);
-void	sort(t_arrays *array, int start, int end, int array_size);
 void	make_zero(t_arrays *array, char arr);
-int		find_b_max_position(t_arrays *array);
-void 	rotateb_or_revrotateb(t_arrays *array);
-int		find_b_min_pos(t_arrays *array);
-
 
 #endif
