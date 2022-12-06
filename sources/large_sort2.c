@@ -6,8 +6,8 @@
 void large_sort2(t_arrays *array)
 {
 	// make 8 groups, 1-7 is even, group 8 is remainder
-	array->group_info.group_size = (array->a_size + 1) / 7;
-	array->group_info.rem_size = (array->a_size + 1) % 7;
+	array->group_info.group_size = (array->a_size + 1) / 10;
+	array->group_info.rem_size = (array->a_size + 1) % 10;
 	array->pos.a1_start = array->a_size + 1;
 	array->pos.a1_end = array->a_size - array->group_info.group_size + 1;
 	array->pos.a2_start = array->a_size - (array->group_info.group_size) + 1;
@@ -22,12 +22,16 @@ void large_sort2(t_arrays *array)
 	array->pos.a6_end = array->a_size - (6 * array->group_info.group_size) + 1;
 	array->pos.a7_start = array->a_size - (6 * array->group_info.group_size) + 1;
 	array->pos.a7_end = array->a_size - (7 * array->group_info.group_size) + 1;
+	array->pos.a8_start = array->a_size - (7 * array->group_info.group_size) + 1;
+	array->pos.a8_end = array->a_size - (8 * array->group_info.group_size) + 1;
+	array->pos.a9_start = array->a_size - (8 * array->group_info.group_size) + 1;
+	array->pos.a9_end = array->a_size - (9 * array->group_info.group_size) + 1;
 
-	if ((array->a_size + 1) % 7 == 0)
-		array->pos.a8_start = 0;
+	if ((array->a_size + 1) % 10 == 0)
+		array->pos.a10_start = 10;
 	else
-		array->pos.a8_start = array->a_size - (7 * array->group_info.group_size) + 1;
-	array->pos.a8_end = 0;
+		array->pos.a10_start = array->a_size - (9 * array->group_info.group_size) + 1;
+	array->pos.a10_end = 0;
 
 	{
 		printf("testing\n");
@@ -71,44 +75,46 @@ void large_sort2(t_arrays *array)
 		{
 			printf("%d, ", array->bubble_sort_arr[i]);
 		}
+		printf("\ngroup 9\n");
+		for (int i = array->pos.a9_end; i < array->pos.a9_start; i++)
+		{
+			printf("%d, ", array->bubble_sort_arr[i]);
+		}
+		printf("\ngroup 10\n");
+		for (int i = array->pos.a10_end; i < array->pos.a10_start; i++)
+		{
+			printf("%d, ", array->bubble_sort_arr[i]);
+		}
 		printf("\n");
 	}
 
 	array->group_info.completed_number = 0;
-
 	array->group_info.first_time = 1;
 	array->group_info.ra_toggle = 0; // sorted_group at top
 	sort(array, array->pos.a5_start, array->pos.a5_end, array->group_info.group_size);
 
 	array->group_info.first_time = 0;
-	array->group_info.top_sort = array->bubble_sort_arr[array->pos.a5_start - 1];
-	array->group_info.bottom_sort = array->bubble_sort_arr[array->pos.a5_end];
 	sort(array, array->pos.a6_start, array->pos.a6_end, array->group_info.group_size);
 
-	array->group_info.bottom_sort = array->bubble_sort_arr[array->pos.a6_end];
+	array->group_info.ra_toggle = 0;
 	sort(array, array->pos.a4_start, array->pos.a4_end, array->group_info.group_size);
 
-	array->group_info.top_sort = array->bubble_sort_arr[array->pos.a4_start];
 	sort(array, array->pos.a7_start, array->pos.a7_end, array->group_info.group_size);
 
-	array->group_info.bottom_sort = array->bubble_sort_arr[array->pos.a7_end];
-	array->group_info.top_sort = array->bubble_sort_arr[array->pos.a4_start - 1];
-	array->group_info.ra_toggle = 0;
 	sort(array, array->pos.a3_start, array->pos.a3_end, array->group_info.group_size);
 
-	array->group_info.top_sort = array->bubble_sort_arr[array->pos.a3_start - 1];
-	array->group_info.ra_toggle = 0;
+	sort(array, array->pos.a8_start, array->pos.a8_end, array->group_info.rem_size);
+
 	sort(array, array->pos.a2_start, array->pos.a2_end, array->group_info.group_size);
+
+	sort(array, array->pos.a9_start, array->pos.a9_end, array->group_info.group_size);
+	
+	sort(array, array->pos.a1_start, array->pos.a1_end, array->group_info.group_size);
 
 	if (array->group_info.rem_size != 0)
 	{
-		array->group_info.ra_toggle = 1;
-		sort(array, array->pos.a8_start, array->pos.a8_end, array->group_info.rem_size);
+		sort(array, array->pos.a10_start, array->pos.a10_end, array->group_info.rem_size);
 	}
-
-	array->group_info.top_sort = array->bubble_sort_arr[array->pos.a2_start - 1];
-	array->group_info.ra_toggle = 0;
-	sort(array, array->pos.a1_start, array->pos.a1_end, array->group_info.group_size);
 }
 
 void sort(t_arrays *array, int start, int end, int array_size)
@@ -216,8 +222,22 @@ void sort(t_arrays *array, int start, int end, int array_size)
 
 	array->group_info.completed_number++;
 
-	if (array->group_info.ra_toggle == 1)
+
+
+	if (array->group_info.first_time == 1)
+	{
+		array->group_info.bottom_sort = array->bubble_sort_arr[end];
+		array->group_info.top_sort = array->bubble_sort_arr[start - 1];
+	}
+
+	if ((array->group_info.ra_toggle == 1) && (array->group_info.first_time == 0))
+	{
+		array->group_info.bottom_sort = array->bubble_sort_arr[end];		
 		array->group_info.ra_toggle = 0;
-	else if (array->group_info.ra_toggle == 0)
+	}
+	else if ((array->group_info.ra_toggle == 0) && (array->group_info.first_time == 0))
+	{
+		array->group_info.top_sort = array->bubble_sort_arr[start - 1];
 		array->group_info.ra_toggle = 1;
+	}
 }

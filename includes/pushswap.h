@@ -36,6 +36,11 @@ typedef struct s_position
 	int a7_end;
 	int a8_start;
 	int a8_end;
+	int a9_start;
+	int a9_end;
+	int a10_start;
+	int a10_end;
+
 }				t_postion;
 
 typedef struct s_arrays
