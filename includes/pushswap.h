@@ -16,6 +16,7 @@ typedef struct s_grp_info
 	int completed_number;
 	int top_sort;
 	int bottom_sort;
+	int top_bottom_array[2][10];
 }				t_grp_info;
 
 typedef struct s_position

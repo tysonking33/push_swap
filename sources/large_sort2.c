@@ -115,6 +115,15 @@ void large_sort2(t_arrays *array)
 	{
 		sort(array, array->pos.a10_start, array->pos.a10_end, array->group_info.rem_size);
 	}
+
+	for (int i = 0; i < 2; i++)
+	{
+		for (int j = 0; j < 10; j++)
+		{
+			printf("%d ", (array->group_info.top_bottom_array[i][j]));
+		}
+		printf("\n");
+	}
 }
 
 void sort(t_arrays *array, int start, int end, int array_size)
@@ -219,7 +228,6 @@ void sort(t_arrays *array, int start, int end, int array_size)
 			}
 		}
 	}
-
 	array->group_info.completed_number++;
 
 
@@ -230,14 +238,16 @@ void sort(t_arrays *array, int start, int end, int array_size)
 		array->group_info.top_sort = array->bubble_sort_arr[start - 1];
 	}
 
-	if ((array->group_info.ra_toggle == 1) && (array->group_info.first_time == 0))
+	if ((array->group_info.ra_toggle == 1) && (array->group_info.first_time == 0) && (array->group_info.completed_number != 2))
 	{
 		array->group_info.bottom_sort = array->bubble_sort_arr[end];		
 		array->group_info.ra_toggle = 0;
 	}
-	else if ((array->group_info.ra_toggle == 0) && (array->group_info.first_time == 0))
+	else if ((array->group_info.ra_toggle == 0) && (array->group_info.first_time == 0) && (array->group_info.completed_number != 2))
 	{
 		array->group_info.top_sort = array->bubble_sort_arr[start - 1];
 		array->group_info.ra_toggle = 1;
 	}
+	(array->group_info.top_bottom_array[0][array->group_info.completed_number - 1]) = array->group_info.top_sort;
+	(array->group_info.top_bottom_array[1][array->group_info.completed_number - 1]) = array->group_info.bottom_sort;
 }
