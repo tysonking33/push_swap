@@ -6,9 +6,11 @@
 void large_sort2(t_arrays *array)
 {
 	int size = array->a_size + 1;
+	int j;
 	for (int i = 0; check_sorted(array) != 1; ++i)
 	{
-		for(int j = 0; j < size; ++j)
+		j = 0;
+		while (j++ < size)
 		{
 			int num = array->a[array->a_size];
 			if ((num >> i) & 1)
