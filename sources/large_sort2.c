@@ -7,19 +7,22 @@ void large_sort2(t_arrays *array)
 {
 	int size = array->a_size + 1;
 	int j;
-	for (int i = 0; check_sorted(array) != 1; ++i)
+	int i;
+	i = 0;
+	while (check_sorted(array) != 1)
 	{
 		j = 0;
 		while (j++ < size)
 		{
 			int num = array->a[array->a_size];
-			if ((num >> i) & 1)
+			if ((num >> (i)) & 1)
 				rotatea(array);
 			else
 				pb(array);
 		}
 		while (array->b_size > -1)
 			pa(array);
+		++i;
 	}
 }
 
