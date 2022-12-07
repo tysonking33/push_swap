@@ -10,12 +10,12 @@ void five_sort(t_arrays * array)
 	{
 		if (array->b[array->b_size] <= array->a[array->a_size])
 		{
-			printf("\n\nmethod 1\n");
+			ft_printf("\n\nmethod 1\n");
 			pa(array);
 		}
 		else if (array->b[array->b_size] <= array->a[array->a_size - 1])
 		{
-			printf("\n\nmethod 2\n");
+			ft_printf("\n\nmethod 2\n");
 			pa(array);
 			swapa(array);
 		}
@@ -23,7 +23,7 @@ void five_sort(t_arrays * array)
 		{
 			if (array->a_size == 2)
 			{
-				printf("\n\nmethod 3\n");
+				ft_printf("\n\nmethod 3\n");
 				revrotatea(array);
 				pa(array);
 				rotatea(array);
@@ -31,7 +31,7 @@ void five_sort(t_arrays * array)
 			}
 			else if (array->a_size == 3)
 			{
-				printf("\n\nmethod 4\n");
+				ft_printf("\n\nmethod 4\n");
 				revrotatea(array);
 				revrotatea(array);
 				pa(array);
@@ -45,7 +45,7 @@ void five_sort(t_arrays * array)
 		}
 		else if (array->b[array->b_size] <= array->a[array->a_size - 3])
 		{
-			printf("\n\nmethod 6\n");
+			ft_printf("\n\nmethod 6\n");
 			revrotatea(array);
 			pa(array);
 			rotatea(array);
@@ -54,7 +54,7 @@ void five_sort(t_arrays * array)
 		}
 		else
 		{
-			printf("\n\nmethod 7\n");
+			ft_printf("\n\nmethod 7\n");
 			pa(array);
 			rotatea(array);
 		}

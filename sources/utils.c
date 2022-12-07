@@ -2,7 +2,7 @@
 
 void error(char *s)
 {
-	printf("error: %s\n", s);
+	ft_printf("error: %s\n", s);
 	exit(1);
 }
 
@@ -78,15 +78,15 @@ void	print_array(t_arrays *array, char *move_type)
 	else
 		i = array->a_size;*/
 	i = array->a_size + array->b_size + 1;
-	printf("%s: Step number:%d\n", move_type, array->step_count);
-	printf("a_size: %d, b_size: %d, 			bubble sort_arr\n", array->a_size, array->b_size);
-	printf("stackA			stackB\n");
+	ft_printf("%s: Step number:%d\n", move_type, array->step_count);
+	ft_printf("a_size: %d, b_size: %d, 			bubble sort_arr\n", array->a_size, array->b_size);
+	ft_printf("stackA			stackB\n");
 	while(i > -1)
 	{
-		printf("[%d]:%d			[%d]:%d			[%d]:%d\n", i, array->a[i], i, array->b[i], i, array->bubble_sort_arr[i]);
+		ft_printf("[%d]:%d			[%d]:%d			[%d]:%d\n", i, array->a[i], i, array->b[i], i, array->bubble_sort_arr[i]);
 		i--;
 	}
-	printf("[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]\n\n");
+	ft_printf("[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]\n\n");
 }
 
 void	ft_ibzero(t_arrays *array)

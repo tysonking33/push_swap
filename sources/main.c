@@ -4,17 +4,19 @@ int	main(int argc, char **argv)
 {
 	t_arrays	*array;
 	array = (t_arrays *)malloc(sizeof(t_arrays));
+	if (argc == 2)
+		argv = ft_split(argv[1], ' ');
 	array_init(array, argc, argv);
 	array->bubble_sort_arr = bubble_sort(array);
 	int sorted;
 
 	sorted = check_sorted(array);
-	printf("sorted: %d\n", sorted);
+	ft_printf("sorted: %d\n", sorted);
 	print_array(array, "inital array");
-	printf("bubblesort:\n");
+	ft_printf("bubblesort:\n");
 	for (int i = (array->a_size); i >= 0; i--)
 	{
-		printf("a[%d] = %d\n", i, array->bubble_sort_arr[i]);
+		ft_printf("a[%d] = %d\n", i, array->bubble_sort_arr[i]);
 	}
 
 	if ((!array->a) || (!array->b))
