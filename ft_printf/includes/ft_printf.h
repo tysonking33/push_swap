@@ -16,6 +16,7 @@
 # include <stdarg.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include "../libft/libft.h"
 
 void	ft_printchar_no_return(char c);
 int		hex_length_ctr(unsigned int num);

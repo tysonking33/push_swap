@@ -1,5 +1,16 @@
-#include "../includes/pushswap.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tytang <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/07 17:03:11 by tytang            #+#    #+#             */
+/*   Updated: 2022/12/08 13:22:19 by tytang           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "../includes/pushswap.h"
 
 //take top element of B and put it on the top of A
 void	pa(t_arrays *array)
@@ -12,7 +23,7 @@ void	pa(t_arrays *array)
 		array->a_size += 1;
 	}
 	array->step_count += 1;
-	print_array(array, "pusha");
+	sel_print(array, "pa");
 }
 
 //take top element of A and put it on the top of B
@@ -26,7 +37,5 @@ void	pb(t_arrays *array)
 		array->a_size -= 1;
 	}
 	array->step_count += 1;
-	print_array(array, "pushb");
+	sel_print(array, "pb");
 }
-
-

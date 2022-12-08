@@ -1,12 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rotate.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tytang <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/07 17:03:28 by tytang            #+#    #+#             */
+/*   Updated: 2022/12/08 14:07:01 by tytang           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/pushswap.h"
 
 //rotatea - 1st element become the last element of a
 void	rotatea(t_arrays *array)
 {
+	int	*temp_arr;
+	int	i;
+
 	if (array->a_size > 0)
 	{
-		int *temp_arr = (int *)malloc((array->a_size + 1)*sizeof(int));
-		int i = 0;
+		temp_arr = (int *)malloc((array->a_size + 1) * sizeof(int));
+		i = 0;
 		while (i <= array->a_size)
 		{
 			temp_arr[i] = array->a[i];
@@ -20,19 +35,21 @@ void	rotatea(t_arrays *array)
 			array->a[i] = temp_arr[i - 1];
 			i++;
 		}
-
 	}
 	array->step_count += 1;
-	print_array(array, "rotatea");
+	sel_print(array, "ra");
 }
 
 //rotateb - 1st element become the last element of b
 void	rotateb(t_arrays *array)
 {
+	int	*temp_arr;
+	int	i;
+
 	if (array->b_size > 0)
 	{
-		int *temp_arr = (int *)malloc((array->b_size + 1)*sizeof(int));
-		int i = 0;
+		temp_arr = (int *)malloc((array->b_size + 1) * sizeof(int));
+		i = 0;
 		while (i <= array->b_size)
 		{
 			temp_arr[i] = array->b[i];
@@ -46,19 +63,21 @@ void	rotateb(t_arrays *array)
 			array->b[i] = temp_arr[i - 1];
 			i++;
 		}
-
 	}
 	array->step_count += 1;
-	print_array(array, "rotateb");
+	sel_print(array, "rb");
 }
 
 //revrotatea - last element of a becomes 1st element of a
 void	revrotatea(t_arrays *array)
 {
+	int	i;
+	int	*temp_arr;
+
 	if (array->a_size > 0)
 	{
-		int *temp_arr = (int *)malloc((array->a_size + 1)*sizeof(int));
-		int i = 0;
+		temp_arr = (int *)malloc((array->a_size + 1) * sizeof(int));
+		i = 0;
 		while (i <= array->a_size)
 		{
 			temp_arr[i] = array->a[i];
@@ -72,20 +91,21 @@ void	revrotatea(t_arrays *array)
 			array->a[i] = temp_arr[i + 1];
 			i++;
 		}
-
 	}
 	array->step_count += 1;
-	print_array(array, "revrotatea");
+	sel_print(array, "ra");
 }
-
 
 //revrotateb - last element of a becomes 1st element of b
 void	revrotateb(t_arrays *array)
 {
+	int	*temp_arr;
+	int	i;
+
 	if (array->a_size > 0)
 	{
-		int *temp_arr = (int *)malloc((array->b_size + 1)*sizeof(int));
-		int i = 0;
+		temp_arr = (int *)malloc((array->b_size + 1) * sizeof(int));
+		i = 0;
 		while (i <= array->b_size)
 		{
 			temp_arr[i] = array->b[i];
@@ -99,8 +119,7 @@ void	revrotateb(t_arrays *array)
 			array->b[i] = temp_arr[i + 1];
 			i++;
 		}
-
 	}
 	array->step_count += 1;
-	print_array(array, "revrotateb");
+	sel_print(array, "rb");
 }

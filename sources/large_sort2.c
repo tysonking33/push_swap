@@ -1,20 +1,32 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   large_sort2.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tytang <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/07 16:11:31 by tytang            #+#    #+#             */
+/*   Updated: 2022/12/08 14:01:56 by tytang           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/pushswap.h"
 
-// array->group_info.ra_toggle = 1; //sorted_group at bottom
-// array->group_info.ra_toggle = 0; //sorted_group at top
-
-void large_sort2(t_arrays *array)
+void	large_sort2(t_arrays *array)
 {
-	int size = array->a_size + 1;
-	int j;
-	int i;
+	int	size;
+	int	j;
+	int	i;
+	int	num;
+
 	i = 0;
+	size = array->a_size + 1;
 	while (check_sorted(array) != 1)
 	{
 		j = 0;
 		while (j++ < size)
 		{
-			int num = array->a[array->a_size];
+			num = array->a[array->a_size];
 			if ((num >> (i)) & 1)
 				rotatea(array);
 			else
@@ -26,58 +38,47 @@ void large_sort2(t_arrays *array)
 	}
 }
 
-//checking if the array is already sorted
-//sorted = 1, unsorted = 0
-int check_sorted(t_arrays *array)
+int	check_sorted(t_arrays *array)
 {
-	int counter;
-	int sorted;
+	int	counter;
+	int	sorted;
 
 	counter = 0;
 	sorted = 0;
 	while (counter <= array->a_size)
 	{
-		//ft_printf("array->a[counter]: %d\n", array->a[counter]);
-		//ft_printf("array->bubble_sort_arr[counter]: %d\n", array->bubble_sort_arr[counter]);
 		if (array->a[counter] == array->bubble_sort_arr[counter])
 			sorted = 1;
 		else
 		{
 			sorted = 0;
-			return 0;
+			return (0);
 		}
-		//ft_printf("sorted: %d\n", sorted);
 		counter++;
 	}
-	return sorted;
+	return (sorted);
 }
 
-int *bubble_sort(t_arrays *array)
+int	*bubble_sort(t_arrays *array)
 {
-	int *temp_arr = (int *)malloc(((array->a_size) + 1)*sizeof(int *));
-	int temp = 0;
-
-	int temp_ctr_extern = 0;
-	int temp_ctr_intern = 0;
-	for (int i = 0; i <= array->a_size; i++)
+	init_temp(array);
+	while (array->temp.ext_ctr < array->a_size)
 	{
-		temp_arr[i] = array->a[i];
-	}
-
-	while (temp_ctr_extern < array->a_size)
-	{
-		temp_ctr_intern = 0;
-		while (temp_ctr_intern < array->a_size)
+		array->temp.int_ctr = 0;
+		while (array->temp.int_ctr < array->a_size)
 		{
-			if (temp_arr[temp_ctr_intern] < temp_arr[temp_ctr_intern + 1])
+			if (array->temp.temp_arr[array->temp.int_ctr]
+				< array->temp.temp_arr[array->temp.int_ctr + 1])
 			{
-				temp = temp_arr[temp_ctr_intern + 1];
-				temp_arr[temp_ctr_intern + 1] = temp_arr[temp_ctr_intern];
-				temp_arr[temp_ctr_intern] = temp;
+				array->temp.temp = array->temp.temp_arr
+				[array->temp.int_ctr + 1];
+				array->temp.temp_arr[array->temp.int_ctr + 1]
+					= array->temp.temp_arr[array->temp.int_ctr];
+				array->temp.temp_arr[array->temp.int_ctr] = array->temp.temp;
 			}
-			temp_ctr_intern++;
+			array->temp.int_ctr++;
 		}
-		temp_ctr_extern++;
+		array->temp.ext_ctr++;
 	}
-	return temp_arr;
+	return (array->temp.temp_arr);
 }
