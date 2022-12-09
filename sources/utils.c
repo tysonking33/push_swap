@@ -71,22 +71,35 @@ void	array_init(t_arrays *array, int argc, char **argv)
 
 void	print_array(t_arrays *array, char *move_type)
 {
-	int i;
+	int	i;
 
-	/*if (array->b_size > array->a_size)
-		i = array->b_size;
-	else
-		i = array->a_size;*/
+	i = 0;
+	if (i == 0)
+		print_move(move_type);
+	else if (i == 1)
+		print_array(array, move_type);
+}
+void	print_array1(t_arrays *array, char *move_type)
+{
+	int	i;
+
 	i = array->a_size + array->b_size + 1;
 	ft_printf("%s: Step number:%d\n", move_type, array->step_count);
-	ft_printf("a_size: %d, b_size: %d, 			bubble sort_arr\n", array->a_size, array->b_size);
-	ft_printf("stackA			stackB\n");
-	while(i > -1)
+	ft_printf("a_size: %d, b_size: %d\n",
+		array->a_size, array->b_size);
+	ft_printf("stackA	stackB	bubble_sort\n");
+	while (i > -1)
 	{
-		ft_printf("[%d]:%d			[%d]:%d			[%d]:%d\n", i, array->a[i], i, array->b[i], i, array->bubble_sort_arr[i]);
+		ft_printf("[%d]:%d	[%d]:%d [%d]:%d\n",
+			i, array->a[i], i, array->b[i], i, array->bubble_sort_arr[i]);
 		i--;
 	}
-	ft_printf("[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]\n\n");
+	ft_printf("[][][][][][][][][][][][][][][][][][][][][][][][][][][][]\n\n");
+}
+
+void	print_move(char *move_type)
+{
+	ft_printf("%s\n", move_type);
 }
 
 void	ft_ibzero(t_arrays *array)
