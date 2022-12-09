@@ -75,5 +75,7 @@ int		check_sorted(t_arrays *array);
 void	five_sort(t_arrays * array);
 void	large_sort2(t_arrays *array);
 void	make_zero(t_arrays *array, char arr);
+void	print_array1(t_arrays *array, char *move_type);
+void	print_move(char *move_type);
 
 #endif
