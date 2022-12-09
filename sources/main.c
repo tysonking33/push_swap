@@ -1,59 +1,86 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tytang <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/07 16:56:35 by tytang            #+#    #+#             */
+/*   Updated: 2022/12/09 19:07:31 by tytang           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/pushswap.h"
+
+void	sel_sort(t_arrays *array)
+{
+	if ((array->a_size == 1) && (check_sorted(array, array->a) == 0))
+		swapa(array);
+	else if ((array->a_size == 2) && (check_sorted(array, array->a) == 0))
+		small_med_large(array);
+	else if ((array->a_size == 4) && (check_sorted(array, array->a) == 0))
+		five_sort(array);
+	else if ((array->a_size >= 3) && (check_sorted(array, array->a) == 0))
+		large_sort2(array);
+}
+
+int	find_dup(t_arrays *array)
+{
+	int	i;
+	int	j;
+	int	dup;
+
+	i = 0;
+	dup = 0;
+	while (i < array->a_size)
+	{
+		j = i + 1;
+		while (j < array->a_size)
+		{
+			if (array->a[i] == array->a[j])
+				dup = 1;
+			j++;
+		}
+		i++;
+	}
+	return (dup);
+}
+
+int	init_check(t_arrays *array, int argc)
+{
+	if ((!array->a) || (!array->b))
+		error("Error\n");
+	if (argc == 1)
+	{
+		error("Error\n");
+		return (0);
+	}
+	if (find_dup(array) == 1)
+	{
+		return (0);
+	}
+	return (1);
+}
 
 int	main(int argc, char **argv)
 {
 	t_arrays	*array;
+	char		*tmp;
+
 	array = (t_arrays *)malloc(sizeof(t_arrays));
+	if (argc == 2)
+	{
+		tmp = ft_strdup(argv[1]);
+		argc = ft_word_count(tmp, ' ') + 1;
+		argv = (char **)malloc((argc + 2) * sizeof(char *));
+		argv = ft_split(tmp, ' ');
+	}
 	array_init(array, argc, argv);
 	array->bubble_sort_arr = bubble_sort(array);
-	int sorted;
-
-	sorted = check_sorted(array);
-	printf("sorted: %d\n", sorted);
-	print_array(array, "inital array");
-	printf("bubblesort:\n");
-	for (int i = (array->a_size); i >= 0; i--)
-	{
-		printf("a[%d] = %d\n", i, array->bubble_sort_arr[i]);
-	}
-
-	if ((!array->a) || (!array->b))
-		error("malloc");
-	/*testing
-	pb(array);
-	pb(array);
-	pa(array);
-	rotatea(array);
-	revrotatea(array);
-	swapa(array);*/
-	//a->size is the top index e.g. a[2] = a->a_size = 2
-	
-	//rintf("array->a_size: %d\n", array->a_size);
-
-	if ((array->a_size == 1) && (sorted == 0))
-	{
-		swapa(array);
-		/*
-		if (array->a[2] > array->a[1])
-			swapa(array);
-		print_array(array, "complete 2 sort");*/
-	}
-	else if ((array->a_size == 2) && (sorted == 0))
-	{
-		small_med_large(array);
-	}
-	else if ((array->a_size == 4) && (sorted == 0))
-	{
-		five_sort(array);
-	}
-	else if ((array->a_size >= 3) && (sorted == 0))
-	{
-		//printf("okaok\n");
-		large_sort2(array);
-	}
-	//print_array(array, "final array");
-	//sorted = check_sorted(array);
-	//printf("sorted: %d\n", sorted);
-	return 0;
+	if (init_check(array, argc) == 0)
+		return (0);
+	print_array(array, "inital_array");
+	sel_sort(array);
+	print_array(array, "final array");
+	return (0);
 }
-
