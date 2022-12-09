@@ -14,7 +14,6 @@
 
 void	large_sort2(t_arrays *array)
 {
-	printf("ls2\n");
 	parse_numbers(array);
 }
 
@@ -68,9 +67,6 @@ void	parse_numbers(t_arrays *array)
 		i++;
 	}
 
-	for (int i = 0; i <= array->a_size; i++)
-		printf("%d %d\n", copy[i][0], copy[i][1]);
-	printf("copy test\n\n");
 	i = 0;
 	while (i <= array->a_size)
 	{
@@ -86,18 +82,7 @@ void	parse_numbers(t_arrays *array)
 		}
 		i++;
 	}
-
-	printf("array->a\n");
-	for (int i = 0; i <= array->a_size; i++)
-		printf("%d ", array->a[i]);
-
-	printf("\n\ncopy array\n");
-	for (int i = 0; i <= array->a_size; i++)
-		printf("%d %d\n", copy[i][0], copy[i][1]);
 	convert_base(array, 2);
-	printf("convert_base\n");
-	for (int i = 0; i <= array->a_size; i++)
-		printf("%d\n", array->a[i]);
 	sort(array);
 	convert_base10(array);
 	i = 0;
