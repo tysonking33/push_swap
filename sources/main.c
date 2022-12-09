@@ -6,7 +6,7 @@
 /*   By: tytang <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 16:56:35 by tytang            #+#    #+#             */
-/*   Updated: 2022/12/09 19:07:31 by tytang           ###   ########.fr       */
+/*   Updated: 2022/12/09 19:48:26 by tytang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	find_dup(t_arrays *array)
 	dup = 0;
 	while (i < array->a_size)
 	{
-		j = i + 1;
+		j = 0;
 		while (j < array->a_size)
 		{
 			if (array->a[i] == array->a[j])
@@ -52,11 +52,12 @@ int	init_check(t_arrays *array, int argc)
 		error("Error\n");
 	if (argc == 1)
 	{
-		error("Error\n");
+		error("Error: invalid arguments");
 		return (0);
 	}
 	if (find_dup(array) == 1)
 	{
+		error("Error: Repeated number(s)");
 		return (0);
 	}
 	return (1);
