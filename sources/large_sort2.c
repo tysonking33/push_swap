@@ -1,20 +1,37 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   large_sort2.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tytang <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/07 16:11:31 by tytang            #+#    #+#             */
+/*   Updated: 2022/12/12 14:51:01 by tytang           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/pushswap.h"
 
-// array->group_info.ra_toggle = 1; //sorted_group at bottom
-// array->group_info.ra_toggle = 0; //sorted_group at top
-
-void large_sort2(t_arrays *array)
+void sort(t_arrays *array)
 {
-	int size = array->a_size + 1;
-	int j;
-	int i;
+	int	size;
+	int	j;
+	int	i;
+	int	num;
+	int	*copy;
+
+	copy = (int *)malloc((array->a_size + 1) * sizeof(int));
 	i = 0;
-	while (check_sorted(array) != 1)
+	size = array->a_size + 1;
+	int check_sorted_ctr = 0;
+	while (check_sorted(array, array->a) != 1)
 	{
+		check_sorted_ctr++;
+
 		j = 0;
 		while (j++ < size)
 		{
-			int num = array->a[array->a_size];
+			num = array->a[array->a_size];
 			if ((num >> (i)) & 1)
 				rotatea(array);
 			else
@@ -24,60 +41,156 @@ void large_sort2(t_arrays *array)
 			pa(array);
 		++i;
 	}
+	printf("check osrted ctr: %d", check_sorted_ctr);
 }
 
-//checking if the array is already sorted
-//sorted = 1, unsorted = 0
-int check_sorted(t_arrays *array)
+void	large_sort2(t_arrays *array)
 {
-	int counter;
-	int sorted;
+	int	*copy[array->a_size + 1];
+	int	i;
+	int	j;
 
-	counter = 0;
-	sorted = 0;
-	while (counter <= array->a_size)
+	i = 0;
+	j = 0;
+	while (i <= array->a_size)
 	{
-		//ft_printf("array->a[counter]: %d\n", array->a[counter]);
-		//ft_printf("array->bubble_sort_arr[counter]: %d\n", array->bubble_sort_arr[counter]);
-		if (array->a[counter] == array->bubble_sort_arr[counter])
-			sorted = 1;
-		else
-		{
-			sorted = 0;
-			return 0;
-		}
-		//ft_printf("sorted: %d\n", sorted);
-		counter++;
+		copy[i] = (int *)malloc(2 * sizeof(int));
+		i++;
 	}
-	return sorted;
-}
 
-int *bubble_sort(t_arrays *array)
-{
-	int *temp_arr = (int *)malloc(((array->a_size) + 1)*sizeof(int *));
-	int temp = 0;
+	i = 0;
+	while (i <= array->a_size)
+	{
+		copy[i][0] = array->a[i];
+		copy[i][1] = -1;
+		i++;
+	}
 
-	int temp_ctr_extern = 0;
-	int temp_ctr_intern = 0;
 	for (int i = 0; i <= array->a_size; i++)
+		printf("%d %d\n", copy[i][0], copy[i][1]);
+	printf("copy test\n\n");
+	i = 0;
+	while (i <= array->a_size)
 	{
-		temp_arr[i] = array->a[i];
-	}
-
-	while (temp_ctr_extern < array->a_size)
-	{
-		temp_ctr_intern = 0;
-		while (temp_ctr_intern < array->a_size)
+		j = 0;
+		while (j <= array->a_size)
 		{
-			if (temp_arr[temp_ctr_intern] < temp_arr[temp_ctr_intern + 1])
+			if (array->a[i] == array->bubble_sort_arr[j])
 			{
-				temp = temp_arr[temp_ctr_intern + 1];
-				temp_arr[temp_ctr_intern + 1] = temp_arr[temp_ctr_intern];
-				temp_arr[temp_ctr_intern] = temp;
+				//array->a[i] = array->a_size - j + 1;
+				copy[i][1] = array->a_size - j + 1;
 			}
-			temp_ctr_intern++;
+			j++;
 		}
-		temp_ctr_extern++;
+		i++;
 	}
-	return temp_arr;
+	
+	for (int i = 0; i<= array->a_size; i++)
+	{
+		array->a[i] = copy[i][1];
+	}
+	printf("array->a\n");
+	for (int i = 0; i <= array->a_size; i++)
+		printf("%d ", array->a[i]);
+
+	printf("\n\ncopy array\n");
+	for (int i = 0; i <= array->a_size; i++)
+		printf("%d %d\n", copy[i][0], copy[i][1]);
+	convert_base(array, 2);
+	printf("convert_base\n");
+	for (int i = 0; i <= array->a_size; i++)
+		printf("%d\n", array->a[i]);
+	sort(array);
+	convert_base10(array);
+	i = 0;
+	while (i <= array->a_size)
+	{
+		j = 0;
+		while (j <= array->a_size)
+		{
+			if (array->a[i] == copy[j][1])
+			{
+				array->a[i] = copy[j][0];
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
+void	convert_base10(t_arrays *array)
+{
+	int ctr;
+	
+	ctr = 0;
+	while (ctr <= array->a_size)
+	{
+		array->a[ctr] = one_b10_vert(array->a[ctr]);
+		ctr++;
+	}
+}
+
+int	one_b10_vert(int num)
+{
+	int decimal = 0;
+	int weight = 1;
+	int temp = num;
+	int rem = 0;
+	while (temp != 0)
+	{
+		rem = temp % 10;
+		decimal = decimal + rem * weight;
+		temp = temp / 10;
+		weight = weight * 2;
+	}
+	return decimal;
+}
+
+void	convert_base(t_arrays *array, int tog)
+{
+	int ctr;
+	int quo;
+	int rem;
+	int new_nbr;
+	int i;
+
+	ctr = 0;
+	while (ctr <= array->a_size)
+	{
+		rem = 0;
+		new_nbr = 0;
+		i = 0;
+		quo = array->a[ctr];
+		while (quo != 0)
+		{
+			rem = quo % tog;
+			quo = quo / tog;
+			new_nbr = (rem * ft_pow(10, i)) + new_nbr;
+			i++;
+		}
+		array->a[ctr] = new_nbr;
+		ctr++;
+	}
+	
+}
+
+int sngl_to_dec(int num)
+{
+	int quo;
+	int rem;
+	int new_nbr;
+	int i;
+
+	rem = 0;
+	new_nbr = 0;
+	i = 0;
+	quo = num;
+	while (quo != 0)
+	{
+		rem = quo % 2;
+		quo = quo / 2;
+		new_nbr = (rem * ft_pow(10, i)) + new_nbr;
+		i++;
+	}
+	return (new_nbr);
 }

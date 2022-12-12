@@ -5,102 +5,68 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tytang <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/08 14:09:30 by tytang            #+#    #+#             */
-/*   Updated: 2022/04/04 12:00:30 by tytang           ###   ########.fr       */
+/*   Created: 2022/12/07 18:03:10 by tytang            #+#    #+#             */
+/*   Updated: 2022/12/07 18:03:52 by tytang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*#include <stdio.h>*/
 #include "libft.h"
+//#include <string.h>
+//#include <stdlib.h>
 
-static int	ft_word_count(char const *str, char c)
+int	ft_word_count(char const *s, char c)
 {
-	int	index;
-	int	c_counter;
+	int	count;
 
-	index = 0;
-	c_counter = 0;
-	while (str[index] != '\0')
+	if (!*s)
+		return (0);
+	count = 0;
+	while (*s)
 	{
-		if (str[index] == c)
-			index++;
-		else
-		{
-			c_counter++;
-			while (str[index] && str[index] != c)
-				index++;
-		}
+		while (*s == c)
+			s++;
+		if (*s)
+			count++;
+		while (*s != c && *s)
+			s++;
 	}
-	return (c_counter);
+	return (count);
 }
 
-static char	*ft_putword(char *word, char const *s, int i, int word_len)
+void	*memalloc(char const*s, char c)
 {
-	int	j;
+	void	*lst;
 
-	j = 0;
-	while (word_len > 0)
-	{
-		word[j] = s[i - word_len];
-		j++;
-		word_len--;
-	}
-	word[j] = '\0';
-	return (word);
-}
-
-static char	**ft_split_words(char const *s, char c,
-		char **new_str, int num_words)
-{
-	int	i;
-	int	word;
-	int	word_len;
-
-	i = 0;
-	word = 0;
-	word_len = 0;
-	while (word < num_words)
-	{
-		while (s[i] && s[i] == c)
-			i++;
-		while (s[i] && s[i] != c)
-		{
-			i++;
-			word_len++;
-		}
-		new_str[word] = (char *)malloc(sizeof(char) * (word_len + 1));
-		if (!new_str)
-			return (0);
-		ft_putword (new_str[word], s, i, word_len);
-		word_len = 0;
-		word++;
-	}
-	new_str[word] = 0;
-	return (new_str);
+	if (!s)
+		return (NULL);
+	lst = malloc((ft_word_count(s, c) + 2) * sizeof(char *));
+	return (lst);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	char			**final_str;
-	unsigned int	num_words;
+	char	**lst;
+	int		word_len;
+	int		i;
 
-	if (!s)
+	lst = memalloc(s, c);
+	if (!lst)
 		return (0);
-	num_words = ft_word_count(s, c);
-	final_str = (char **)malloc(sizeof(char *) * (num_words + 1));
-	if (!final_str)
-		return (0);
-	ft_split_words(s, c, final_str, num_words);
-	return (final_str);
+	i = 1;
+	while (*s)
+	{
+		while (*s == c && *s)
+			s++;
+		if (*s)
+		{
+			if (!ft_strchr(s, c))
+				word_len = ft_strlen(s);
+			else
+				word_len = ft_strchr(s, c) - s;
+			lst[i++] = ft_substr(s, 0, word_len);
+			s += word_len;
+		}
+	}
+	lst[i] = NULL;
+	return (lst);
 }
-
-/*
-int	main(void)
-{
-	char const	s[] = "wow,wee,geez,rick";
-	char	c = ',';
-	ft_split(s, c);
-	//printf("%s", ft_split(s, c));
-	return (0);
-}
-*/
