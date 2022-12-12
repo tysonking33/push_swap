@@ -1,59 +1,28 @@
 #include "../includes/pushswap.h"
 
-int	main(int argc, char **argv)
+int main(int argc, char *argv)
 {
-	t_arrays	*array;
-	array = (t_arrays *)malloc(sizeof(t_arrays));
-	array_init(array, argc, argv);
-	array->bubble_sort_arr = bubble_sort(array);
-	int sorted;
+    t_stack *a;
+    t_stack *b;
+    int stack_size;
+    char	*tmp;
 
-	sorted = check_sorted(array);
-	printf("sorted: %d\n", sorted);
-	print_array(array, "inital array");
-	printf("bubblesort:\n");
-	for (int i = (array->a_size); i >= 0; i--)
+	if (argc < 2)
+		return (0);
+	if (argc== 2)
 	{
-		printf("a[%d] = %d\n", i, array->bubble_sort_arr[i]);
+		tmp = ft_strdup(argv[1]);
+		argv = malloc((ft_wordcount(tmp, ' ') + 2) * sizeof(char *));
+		argv = ft_split(tmp, ' ');
+		argc= ft_wordcount(tmp, ' ') + 1;
 	}
-
-	if ((!array->a) || (!array->b))
-		error("malloc");
-	/*testing
-	pb(array);
-	pb(array);
-	pa(array);
-	rotatea(array);
-	revrotatea(array);
-	swapa(array);*/
-	//a->size is the top index e.g. a[2] = a->a_size = 2
-	
-	//rintf("array->a_size: %d\n", array->a_size);
-
-	if ((array->a_size == 1) && (sorted == 0))
-	{
-		swapa(array);
-		/*
-		if (array->a[2] > array->a[1])
-			swapa(array);
-		print_array(array, "complete 2 sort");*/
-	}
-	else if ((array->a_size == 2) && (sorted == 0))
-	{
-		small_med_large(array);
-	}
-	else if ((array->a_size == 4) && (sorted == 0))
-	{
-		five_sort(array);
-	}
-	else if ((array->a_size >= 3) && (sorted == 0))
-	{
-		//printf("okaok\n");
-		large_sort2(array);
-	}
-	//print_array(array, "final array");
-	//sorted = check_sorted(array);
-	//printf("sorted: %d\n", sorted);
-	return 0;
+	if (!input_correct_check(argv))
+		exit_error(NULL, NULL);
+	b = NULL;
+	a = stack_fill(argc, argv);
+	stack_size = get_stack_size(a);
+	assign_index(a, stack_size + 1);
+	push_swap(&a, &b, stack_size);
+	free_stack(&a);
+	free_stack(&b);
 }
-
