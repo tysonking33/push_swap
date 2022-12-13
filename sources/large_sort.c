@@ -6,9 +6,12 @@ void    large_sort(t_stack **a, t_stack **b)
     three_sort(a);
     while (*b)
     {
-        
+        find_target_pos(a, b);
+        get_cost(a, b);
+        do_cheapest_move(a, b);
     }
-    
+    if (!is_sorted(*a))
+        shift_stack(a);
 }
 
 void    push_all_but_three(t_stack **a, t_stack **b)
@@ -36,4 +39,30 @@ void    push_all_but_three(t_stack **a, t_stack **b)
         do_pb(a, b);
         pushed_ctr++;
     }
+}
+
+void    shift_stack(t_stack **a)
+{
+    int lowest_pos;
+    int stack_size;
+
+    stack_size = get_stack_size(*a);
+    lowest_pos = get_lowest_idx_pos(a);
+    if (lowest_pos > stack_size / 2)
+    {
+        while (lowest_pos < stack_size)
+        {
+            rra(a)
+            lowest_pos++;
+        }
+    }
+    else
+    {
+        while (lowest_pos > 0)
+        {
+            ra(a);
+            lowest_pos--;
+        }
+    }
+
 }

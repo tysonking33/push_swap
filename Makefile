@@ -7,10 +7,19 @@ LINKS = -I./includes -L./ft_printf/includes
 
 SRCS_DIR = sources/
 
-FILES = main \
-		input_check \
-		utils1 \
-		initialise \
+FILES = cost \
+	initialise \
+	input_check \
+	large_sort \
+	main \
+	move \
+	positions \
+	push \
+	revrotate \
+	rotate \
+	swap \
+	three_sort \
+	utils1 \
 
 SRCS = $(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES)))
 OBJS_DIR = sources/

@@ -62,5 +62,28 @@ void    push(t_stack **src, t_stack  **dest);
 void    pa(t_stack **a, t_stack **b);
 void    pb(t_stack **a, t_stack **b);
 
+/* found in positions.c */
+void    find_target_pos(t_stack **a, t_stack **b);
+void    get_pos(t_stack **stack);
+static int  get_target(t_stack **a, int b_idx, int target_idx, int target_pos);
+void    get_lowest_idx_pos(t_stack  **stack);
+
+/* found in revrotate.c */
+void    revrotate(t_stack **stack);
+void    rra(t_stack **a);
+void    rrb(t_stack **b);
+void    rrr(t_stack **a t_stack **b);
+
+/* found in cost.c */
+void	get_cost(t_stack **a, t_stack **b);
+void	do_cheapest_move(t_stack **a, t_stack **b);
+int ft_abs(int num);
+
+/* found in move.c */
+void	make_move(t_stack **a, t_stack **b, int cost_a, int cost_b)
+static void	do_rev_rotate_both(t_stack **a, t_stack **b, int *cost_a, int *cost_b);
+static void	do_rotate_both(t_stack **a, t_stack **b, int *cost_a, int *cost_b)
+static void	do_rotate_a(t_stack **a, int *cost)
+static void	do_rotate_b(t_stack **b, int *cost)
 
 #endif
