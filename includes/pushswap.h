@@ -22,7 +22,7 @@ typedef struct s_stack
 /* found in main.c */
 void	push_swap(t_stack **a, t_stack **b, int stack_size);
 int	is_sorted(t_stack *a);
-int main(int argc, char *argv);
+int main(int argc, char **argv);
 
 /* found in input_check.c */
 int input_correct_check(char **argv);
