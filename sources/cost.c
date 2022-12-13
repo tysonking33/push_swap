@@ -25,12 +25,12 @@ void	get_cost(t_stack **a, t_stack **b)
 
 void	do_cheapest_move(t_stack **a, t_stack **b)
 {
-    t_stack *temp;
+    t_stack     *temp;
     int         cheapest;
     int         cost_a;
     int         cost_b;
 
-    temp = *stack_b;
+    temp = *b;
     cheapest = INT_MAX;
     while (temp)
     {
