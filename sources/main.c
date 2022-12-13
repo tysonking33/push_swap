@@ -21,7 +21,7 @@ int	is_sorted(t_stack *a)
 	return (1);
 }
 
-int main(int argc, char *argv)
+int main(int argc, char **argv)
 {
     t_stack *a;
     t_stack *b;
