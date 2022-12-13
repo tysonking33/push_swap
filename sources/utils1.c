@@ -41,7 +41,7 @@ int get_stack_size(t_stack *stack)
 t_stack *get_sec_from_bttm(t_stack *stack)
 {
     while ((stack) && (stack->next) && ((stack->next)->next) != NULL)
-        stack = stack_next;
+        stack = stack->next;
     return (stack);
 }
 

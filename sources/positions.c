@@ -62,7 +62,7 @@ static int  get_target(t_stack **a, int b_idx, int target_idx, int target_pos)
     return (target_pos);
 }
 
-void    get_lowest_idx_pos(t_stack  **stack)
+int    get_lowest_idx_pos(t_stack  **stack)
 {
     t_stack *temp;
     int lowest_idx;

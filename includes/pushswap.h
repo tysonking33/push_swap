@@ -5,7 +5,6 @@
 # include <unistd.h>
 # include <stdlib.h>
 #include <limits.h>
-
 # include "../ft_printf/includes/ft_printf.h"
 
 typedef struct s_stack
@@ -67,8 +66,8 @@ void    pb(t_stack **a, t_stack **b);
 /* found in positions.c */
 void    find_target_pos(t_stack **a, t_stack **b);
 void    get_pos(t_stack **stack);
-int  get_target(t_stack **a, int b_idx, int target_idx, int target_pos);
-void    get_lowest_idx_pos(t_stack  **stack);
+//static int  get_target(t_stack **a, int b_idx, int target_idx, int target_pos);
+int    get_lowest_idx_pos(t_stack  **stack);
 
 /* found in revrotate.c */
 void    revrotate(t_stack **stack);
@@ -83,9 +82,13 @@ int ft_abs(int num);
 
 /* found in move.c */
 void	make_move(t_stack **a, t_stack **b, int cost_a, int cost_b);
-void	do_rev_rotate_both(t_stack **a, t_stack **b, int *cost_a, int *cost_b);
-void	do_rotate_both(t_stack **a, t_stack **b, int *cost_a, int *cost_b);
-void	do_rotate_a(t_stack **a, int *cost);
-void	do_rotate_b(t_stack **b, int *cost);
+/*static void	do_rev_rotate_both(t_stack **a, t_stack **b, int *cost_a, int *cost_b);
+static void	do_rotate_both(t_stack **a, t_stack **b, int *cost_a, int *cost_b);
+static void	do_rotate_a(t_stack **a, int *cost);
+static void	do_rotate_b(t_stack **b, int *cost);*/
 
+/* found in large_sort.c */
+void    large_sort(t_stack **a, t_stack **b);
+void    push_all_but_three(t_stack **a, t_stack **b);
+void    shift_stack(t_stack **a);
 #endif

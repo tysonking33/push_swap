@@ -11,7 +11,7 @@ void    revrotate(t_stack **stack)
     temp = *stack;
     *stack = tail;
     (*stack)->next = temp;
-    before_tail->next = NULL;
+    b4_tail->next = NULL;
 }
 
 void    rra(t_stack **a)

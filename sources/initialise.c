@@ -3,7 +3,7 @@
 t_stack *stack_fill(int argc, char **argv)
 {
     t_stack *a;
-    long_int    nb;
+    long int    nb;
     int         i;
 
     a = NULL;
@@ -20,7 +20,8 @@ t_stack *stack_fill(int argc, char **argv)
         else
             stack_add_bottom(&a, stack_new(nb));
         
-    }
+	}
+	return (a);
 }
 
 t_stack *stack_new(int value)
@@ -58,7 +59,7 @@ void    stack_add_bottom(t_stack **stack, t_stack *new)
 t_stack *get_stack_bottom(t_stack *stack)
 {
     while ((stack) && (stack->next != NULL))
-        stack = stack_next;
+        stack = stack->next;
     return (stack);
 }
 

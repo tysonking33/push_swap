@@ -9,7 +9,7 @@ int input_correct_check(char **argv)
     nbr_zero = 0;
     while(argv[ctr])
     {
-        if (!is_good_int(av[ctr]))
+        if (!is_good_int(argv[ctr]))
             return (0);
         nbr_zero += is_nbr_zero(argv[ctr]);
         ctr++;
@@ -26,11 +26,11 @@ int is_good_int(char *c)
     int i;
 
     i = 0;
-    if ((c[i] == '-') || (c[i] == '+') && (c[1] == '\0'))
+    if (((c[i] == '-') || (c[i] == '+')) && (c[1] == '\0'))
         i++;
-    while ((c[i]) && ft_isdigit(c[i])
+    while ((c[i]) && (ft_isdigit(c[i])))
         i++;
-    if (c != '\0')
+    if (c[i] != '\0')
         return (0);
     return (1);
 }
@@ -40,27 +40,27 @@ int is_nbr_zero(char *c)
     int i;
 
     i = 0;
-    if ((c[i] == '-') || (c[i] == '+') && (c[1] == '\0'))
+    if (((c[i] == '-') || (c[i] == '+')) && (c[1] == '\0'))
         i++;
     while (c[i] == 0)
         i++;
-    if (c != '\0')
+    if (c[i] != '\0')
         return (0);
     return (1);
 }
 
 int dup_check(char **str)
 {
-    int	i;
-	int	j;
+    size_t	i;
+	size_t	j;
 	int	dup;
 
 	i = 0;
 	dup = 0;
-	while (i < ft_strlen(str))
+	while (i < ft_strlen(*str))
 	{
 		j = 0;
-		while (j < ft_strlen(str))
+		while (j < ft_strlen(*str))
 		{
 			if ((str[i] == str[j]) && (i != j))
 				dup = 1;

@@ -9,10 +9,10 @@ void swap(t_stack *stack)
         return ;
     temp_val = stack->value;
     temp_idx = stack->index;
-    stack->value; = (stack->next)->value;
-    stack->index; = (stack->next)->index;
-    (stack->next)->value = temp_value;
-    (stack->next)->index; = temp_idx;
+    stack->value = (stack->next)->value;
+    stack->index = (stack->next)->index;
+    (stack->next)->value = temp_val;
+    (stack->next)->index = temp_idx;
 }
 
 void    sa(t_stack **a)
@@ -29,7 +29,7 @@ void    sb(t_stack **b)
 
 void    ss(t_stack **a, t_stack **b)
 {
-    swap(ab);
+    swap(*a);
     swap(*b);
     ft_printf("ss\n");
 }

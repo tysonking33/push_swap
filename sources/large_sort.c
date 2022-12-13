@@ -20,7 +20,7 @@ void    push_all_but_three(t_stack **a, t_stack **b)
     int pushed_ctr;
     int i;
 
-    stack_size = get_stack_size(a);
+    stack_size = get_stack_size(*a);
     pushed_ctr = 0;
     i = 0;
     while ((stack_size > 6) && (i < stack_size) && (pushed_ctr < (stack_size / 2)))
@@ -36,7 +36,7 @@ void    push_all_but_three(t_stack **a, t_stack **b)
     }
     while (stack_size - pushed_ctr > 3)
     {
-        do_pb(a, b);
+        pb(a, b);
         pushed_ctr++;
     }
 }
@@ -52,7 +52,7 @@ void    shift_stack(t_stack **a)
     {
         while (lowest_pos < stack_size)
         {
-            rra(a)
+            rra(a);
             lowest_pos++;
         }
     }

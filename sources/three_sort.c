@@ -6,7 +6,7 @@ void    three_sort(t_stack **stack)
 
     if (is_sorted(*stack))
         return;
-    higher = find_highest_idx(stack);
+    highest = find_highest_idx(*stack);
     if ((*stack)->index == highest)
         ra(stack);
     else if ((*stack)->next->index == highest)
