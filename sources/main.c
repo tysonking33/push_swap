@@ -1,5 +1,26 @@
 #include "../includes/pushswap.h"
 
+void	push_swap(t_stack **a, t_stack **b, int stack_size)
+{
+	if((stack_size == 2) && (!is_sorted(*stack_a))
+		sa(stack_a);
+	else if (stack_size == 3)
+		three_sort(a);
+	else if ((stack_size > 3) && (!is_sorted(*stack_a))
+		large_sort(a, b);
+}
+
+int	is_sorted(t_stack *a)
+{
+	while (stack->next != NULL)
+	{
+		if (stack->value > (stack->next)->value)
+			return 0;
+			stack = stack->next;
+	}
+	return (1);
+}
+
 int main(int argc, char *argv)
 {
     t_stack *a;
