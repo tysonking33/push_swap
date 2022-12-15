@@ -6,7 +6,7 @@
 /*   By: tytang <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 17:59:02 by tytang            #+#    #+#             */
-/*   Updated: 2022/12/12 14:49:19 by tytang           ###   ########.fr       */
+/*   Updated: 2022/12/15 17:01:39 by tytang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ typedef struct s_arrays
 	int			*a_and_b_moves;
 	int			int_ctr;
 	int			out_ctr;
+	int			five_togg;
 	t_postion	pos;
 	t_grp_info	group_info;
 	t_temp		temp;
@@ -112,6 +113,8 @@ void	convert_base(t_arrays *array, int tog);
 int		ft_pow(int num, int power);
 void	convert_base10(t_arrays *array);
 int		one_b10_vert(int num);
-int sngl_to_dec(int num);
+int		sngl_to_dec(int num);
+void	init_copy_arr(t_arrays *array, int **copy);
+void	replace_ref(t_arrays *array, int **copy);
 
 #endif

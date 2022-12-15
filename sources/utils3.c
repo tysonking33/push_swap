@@ -6,7 +6,7 @@
 /*   By: tytang <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 13:36:06 by tytang            #+#    #+#             */
-/*   Updated: 2022/12/12 14:47:53 by tytang           ###   ########.fr       */
+/*   Updated: 2022/12/15 12:54:57 by tytang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	ft_pow(int num, int power)
 {
-	int new_num;
-	int ctr;
+	int	new_num;
+	int	ctr;
 
 	ctr = 0;
 	new_num = 1;
@@ -24,13 +24,13 @@ int	ft_pow(int num, int power)
 		new_num = new_num * num;
 		ctr++;
 	}
-	return new_num;
+	return (new_num);
 }
 
 int	*copy_a(t_arrays *array)
 {
 	int	*copy;
-	int i;
+	int	i;
 
 	copy = (int *)malloc((array->a_size + 1) * sizeof(int));
 	i = 0;
@@ -39,7 +39,7 @@ int	*copy_a(t_arrays *array)
 		copy[i] = array->a[i];
 		i++;
 	}
-	return copy;
+	return (copy);
 }
 
 int	check_sorted(t_arrays *array, int *array1)

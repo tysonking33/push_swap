@@ -6,7 +6,7 @@
 /*   By: tytang <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 16:56:35 by tytang            #+#    #+#             */
-/*   Updated: 2022/12/12 13:41:20 by tytang           ###   ########.fr       */
+/*   Updated: 2022/12/15 13:02:59 by tytang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,7 @@ int	find_dup(t_arrays *array)
 		while (j < array->a_size)
 		{
 			if ((array->a[i] == array->a[j]) && (i != j))
-			{
-				printf("array->a[i]: %d == array->a[j]: %d\n", array->a[i], array->a[j]);
 				dup = 1;
-			}
 			j++;
 		}
 		i++;
@@ -83,7 +80,6 @@ int	main(int argc, char **argv)
 	array->bubble_sort_arr = bubble_sort(array);
 	if (init_check(array, argc) == 0)
 		return (0);
-	print_array(array, "inital_array");
 	sel_sort(array);
 	print_array(array, "final array");
 	return (0);
