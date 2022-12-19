@@ -1,9 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tytang <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/07 15:24:11 by tytang            #+#    #+#             */
+/*   Updated: 2022/12/19 18:11:09 by tytang           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/pushswap.h"
 
-void error(char *s)
+void	error(char *s)
 {
-	printf("error: %s\n", s);
-	exit(1);
+	char	*h;
+
+	h = s;
+	ft_printf("%s", s);
+	exit(0);
 }
 
 int	ft_atoi(const char *str)
@@ -35,64 +50,47 @@ int	ft_atoi(const char *str)
 
 void	array_init(t_arrays *array, int argc, char **argv)
 {
-	int	out_ctr;
-	int	int_ctr;
-
-	out_ctr = 1;
-	while (out_ctr < argc)
-	{
-		int_ctr = 0;
-		while (argv[out_ctr][int_ctr] != '\0')
-		{
-			if (argv[out_ctr][int_ctr] == '-')
-				int_ctr++;
-			if ((argv[out_ctr][int_ctr] < '0') || (argv[out_ctr][int_ctr] > '9'))
-				error("characters in args");
-			int_ctr++;
-		}
-		out_ctr++;
-	}
+	calc_int_ctr(array, argc, argv);
 	array->a = (int *)malloc((argc - 1) * sizeof(int *));
 	array->b = (int *)malloc((argc - 1) * sizeof(int *));
 	array->a_size = argc - 2;
 	array->b_size = -1;
 	array->step_count = 0;
 	ft_ibzero(array);
-	int_ctr = 0;
-	out_ctr = argc - 1;
-	while (out_ctr != 0)
+	array->int_ctr = 0;
+	array->out_ctr = argc - 1;
+	while (array->out_ctr != 0)
 	{
-		array->a[int_ctr] = ft_atoi(argv[out_ctr]);
-		out_ctr--;
-		int_ctr++;
+		if (ft_strlen(argv[array->out_ctr]) > 7)
+			error("Error\n");
+		array->a[array->int_ctr] = ft_atoi(argv[array->out_ctr]);
+		array->out_ctr--;
+		array->int_ctr++;
 	}
-	//print_array(array, "test");
-}
-
-void	print_array(t_arrays *array, char *move_type)
-{
-	int i;
-
-	if (array->b_size > array->a_size)
-		i = array->b_size;
-	else
-		i = array->a_size;
-	printf("%s: Step number:%d\n", move_type, array->step_count);
-	printf("a_size: %d, b_size: %d\n", array->a_size, array->b_size);
-	printf("stackA			stackB\n");
-	while(i > -1)
-	{
-		printf("[%d]:%d			[%d]:%d\n", i, array->a[i], i, array->b[i]);
-		i--;
-	}
-	printf("[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]\n\n");
 }
 
 void	ft_ibzero(t_arrays *array)
 {
-	int i;
+	int	i;
+
 	i = array->a_size + 1;
-	
 	while (i--)
 		array->b[i] = 0;
+}
+
+void	make_zero(t_arrays *array, char arr)
+{
+	int	i;
+
+	i = 0;
+	while ((i <= array->a_size) && (arr == 'a'))
+	{
+		array->a[i] = 0;
+		i++;
+	}
+	while ((i <= array->b_size) && (arr == 'b'))
+	{
+		array->b[i] = 0;
+		i++;
+	}
 }
