@@ -6,7 +6,7 @@
 /*   By: tytang <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 15:24:11 by tytang            #+#    #+#             */
-/*   Updated: 2022/12/19 18:11:09 by tytang           ###   ########.fr       */
+/*   Updated: 2022/12/20 13:23:34 by tytang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,9 @@ void	array_init(t_arrays *array, int argc, char **argv)
 	array->out_ctr = argc - 1;
 	while (array->out_ctr != 0)
 	{
-		if (ft_strlen(argv[array->out_ctr]) > 7)
+		if ((ft_strlen(argv[array->out_ctr]) > 7)
+			|| (ft_ato_ld(argv[array->out_ctr]) > 2147483647)
+			|| (ft_ato_ld(argv[array->out_ctr]) < -2147483648))
 			error("Error\n");
 		array->a[array->int_ctr] = ft_atoi(argv[array->out_ctr]);
 		array->out_ctr--;

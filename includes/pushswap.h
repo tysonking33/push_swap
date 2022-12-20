@@ -6,7 +6,7 @@
 /*   By: tytang <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 17:59:02 by tytang            #+#    #+#             */
-/*   Updated: 2022/12/19 18:04:34 by tytang           ###   ########.fr       */
+/*   Updated: 2022/12/20 15:13:16 by tytang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,43 +77,44 @@ typedef struct s_arrays
 	t_temp		temp;
 }				t_arrays;
 
-void	pa(t_arrays *array);
-void	pb(t_arrays *array);
-int		main(int argc, char **argv);
-void	rotatea(t_arrays *array);
-void	error(char *s);
-int		ft_atoi(const char *str);
-void	array_init(t_arrays *array, int argc, char **argv);
-void	print_array(t_arrays *array, char *move_type);
-void	ft_ibzero(t_arrays *array);
-void	rotateb(t_arrays *array);
-void	revrotatea(t_arrays *array);
-void	revrotateb(t_arrays *array);
-void	swapa(t_arrays *array);
-void	swapb(t_arrays *array);
-void	sim_swap(t_arrays *array);
-void	small_med_large(t_arrays *array);
-int		*bubble_sort(t_arrays *array);
-int		check_sorted(t_arrays *array, int *array1);
-void	five_sort(t_arrays *array);
-void	large_sort2(t_arrays *array);
-void	make_zero(t_arrays *array, char arr);
-void	calc_int_ctr(t_arrays *array, int argc, char **argv);
-void	init_temp(t_arrays *array);
-void	sel_sort(t_arrays *array);
-void	btop_lt_adwn(t_arrays *arrays, int togg);
-int		find_dup(t_arrays *array);
-void	print_move(char *move_type);
-void	sel_print(t_arrays *array, char *move_type);
-void	parse_numbers(t_arrays *array);
-int		*copy_a(t_arrays *array);
-void	sort(t_arrays *array);
-void	convert_base(t_arrays *array, int tog);
-int		ft_pow(int num, int power);
-void	convert_base10(t_arrays *array);
-int		one_b10_vert(int num);
-int		sngl_to_dec(int num);
-void	init_copy_arr(t_arrays *array, int **copy);
-void	replace_ref(t_arrays *array, int **copy);
-int		check_arg_size(t_arrays *array);
+void		pa(t_arrays *array);
+void		pb(t_arrays *array);
+int			main(int argc, char **argv);
+void		rotatea(t_arrays *array);
+void		error(char *s);
+int			ft_atoi(const char *str);
+void		array_init(t_arrays *array, int argc, char **argv);
+void		print_array(t_arrays *array, char *move_type);
+void		ft_ibzero(t_arrays *array);
+void		rotateb(t_arrays *array);
+void		revrotatea(t_arrays *array);
+void		revrotateb(t_arrays *array);
+void		swapa(t_arrays *array);
+void		swapb(t_arrays *array);
+void		sim_swap(t_arrays *array);
+void		small_med_large(t_arrays *array);
+int			*bubble_sort(t_arrays *array);
+int			check_sorted(t_arrays *array, int *array1);
+void		five_sort(t_arrays *array);
+void		large_sort2(t_arrays *array);
+void		make_zero(t_arrays *array, char arr);
+void		calc_int_ctr(t_arrays *array, int argc, char **argv);
+void		init_temp(t_arrays *array);
+void		sel_sort(t_arrays *array);
+int			find_dup(t_arrays *array);
+void		print_move(char *move_type);
+void		sel_print(t_arrays *array, char *move_type);
+void		parse_numbers(t_arrays *array);
+int			*copy_a(t_arrays *array);
+void		sort(t_arrays *array);
+void		convert_base(t_arrays *array, int tog);
+int			ft_pow(int num, int power);
+void		convert_base10(t_arrays *array);
+int			one_b10_vert(int num);
+int			sngl_to_dec(int num);
+void		init_copy_arr(t_arrays *array, int **copy);
+void		replace_ref(t_arrays *array, int **copy);
+int			check_arg_size(t_arrays *array);
+long double	ft_ato_ld(const char *str);
+void		push_to_a(t_arrays *array);
 #endif
