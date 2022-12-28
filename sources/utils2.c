@@ -6,7 +6,7 @@
 /*   By: tytang <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 16:01:02 by tytang            #+#    #+#             */
-/*   Updated: 2022/12/19 16:48:23 by tytang           ###   ########.fr       */
+/*   Updated: 2022/12/22 14:58:34 by tytang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	sel_print(t_arrays *array, char *move_type)
 {
 	int	i;
 
-	i = 1;
+	i = 0;
 	if (i == 0)
 		print_move(move_type);
 	else if (i == 1)
@@ -68,6 +68,8 @@ void	calc_int_ctr(t_arrays *array, int argc, char **argv)
 void	init_temp(t_arrays *array)
 {
 	array->temp.temp_arr = (int *)malloc(((array->a_size) + 1) * sizeof(int *));
+	if (!array->temp.temp_arr)
+		error("Error\n");
 	array->temp.ext_ctr = 0;
 	array->temp.int_ctr = 0;
 	array->temp.temp = 0;

@@ -39,7 +39,7 @@ void	*memalloc(char const*s, char c)
 
 	if (!s)
 		return (NULL);
-	lst = malloc((ft_word_count(s, c) + 2) * sizeof(char *));
+	lst = malloc((ft_word_count(s, c) + 3) * sizeof(char *));
 	return (lst);
 }
 

@@ -6,7 +6,7 @@
 /*   By: tytang <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 13:36:06 by tytang            #+#    #+#             */
-/*   Updated: 2022/12/19 16:28:59 by tytang           ###   ########.fr       */
+/*   Updated: 2022/12/22 15:16:55 by tytang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int	*copy_a(t_arrays *array)
 	int	i;
 
 	copy = (int *)malloc((array->a_size + 1) * sizeof(int));
+	if (!copy)
+		error("Error\n");
 	i = 0;
 	while (i <= array->a_size)
 	{

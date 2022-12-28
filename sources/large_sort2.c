@@ -6,7 +6,7 @@
 /*   By: tytang <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 16:11:31 by tytang            #+#    #+#             */
-/*   Updated: 2022/12/19 17:43:46 by tytang           ###   ########.fr       */
+/*   Updated: 2022/12/22 14:54:51 by tytang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,7 @@ void	large_sort2(t_arrays *array)
 		i++;
 	}
 	sort(array);
-	i = 0;
 	replace_ref(array, copy);
-	free(copy);
-	free(array->bubble_sort_arr);
 }
 
 void	init_copy_arr(t_arrays *array, int **copy)

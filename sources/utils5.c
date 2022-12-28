@@ -12,22 +12,6 @@
 
 #include "../includes/pushswap.h"
 
-int	check_arg_size(t_arrays *array)
-{
-	int	i;
-	int	large;
-
-	i = 0;
-	large = 0;
-	while (i < array->a_size)
-	{
-		if ((array->a[i] <= -2147483648) || (array->a[i] >= 2147483647))
-			large = 1;
-		i++;
-	}
-	return (large);
-}
-
 long double	ft_ato_ld(const char *str)
 {
 	int				sign;

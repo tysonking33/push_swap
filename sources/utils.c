@@ -6,7 +6,7 @@
 /*   By: tytang <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 15:24:11 by tytang            #+#    #+#             */
-/*   Updated: 2022/12/20 13:23:34 by tytang           ###   ########.fr       */
+/*   Updated: 2022/12/22 14:58:09 by tytang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ void	array_init(t_arrays *array, int argc, char **argv)
 	calc_int_ctr(array, argc, argv);
 	array->a = (int *)malloc((argc - 1) * sizeof(int *));
 	array->b = (int *)malloc((argc - 1) * sizeof(int *));
+	if (!array->a || !array->b)
+		error("Error\n");
 	array->a_size = argc - 2;
 	array->b_size = -1;
 	array->step_count = 0;
@@ -61,9 +63,10 @@ void	array_init(t_arrays *array, int argc, char **argv)
 	array->out_ctr = argc - 1;
 	while (array->out_ctr != 0)
 	{
-		if ((ft_strlen(argv[array->out_ctr]) > 7)
-			|| (ft_ato_ld(argv[array->out_ctr]) > 2147483647)
-			|| (ft_ato_ld(argv[array->out_ctr]) < -2147483648))
+		if (((ft_strlen(argv[array->out_ctr]) > 10)
+				&& (ft_ato_ld(argv[array->out_ctr]) > 2147483647))
+			|| ((ft_strlen(argv[array->out_ctr]) > 11)
+				&& (ft_ato_ld(argv[array->out_ctr]) < -2147483648)))
 			error("Error\n");
 		array->a[array->int_ctr] = ft_atoi(argv[array->out_ctr]);
 		array->out_ctr--;

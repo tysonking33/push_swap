@@ -6,7 +6,7 @@
 /*   By: tytang <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 17:59:02 by tytang            #+#    #+#             */
-/*   Updated: 2022/12/20 15:13:16 by tytang           ###   ########.fr       */
+/*   Updated: 2022/12/20 15:21:06 by tytang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,6 @@ int			one_b10_vert(int num);
 int			sngl_to_dec(int num);
 void		init_copy_arr(t_arrays *array, int **copy);
 void		replace_ref(t_arrays *array, int **copy);
-int			check_arg_size(t_arrays *array);
 long double	ft_ato_ld(const char *str);
 void		push_to_a(t_arrays *array);
 #endif

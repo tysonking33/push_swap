@@ -6,7 +6,7 @@
 /*   By: tytang <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 16:56:35 by tytang            #+#    #+#             */
-/*   Updated: 2022/12/20 13:14:07 by tytang           ###   ########.fr       */
+/*   Updated: 2022/12/22 17:18:35 by tytang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ int	find_dup(t_arrays *array)
 
 	i = 0;
 	dup = 0;
-	while (i < array->a_size)
+	while (i <= array->a_size)
 	{
 		j = 0;
-		while (j < array->a_size)
+		while (j <= array->a_size)
 		{
 			if ((array->a[i] == array->a[j]) && (i != j))
 				dup = 1;
@@ -48,10 +48,8 @@ int	find_dup(t_arrays *array)
 
 int	init_check(t_arrays *array, int argc)
 {
-	if (argc == 1)
-		error("./push_swap\n");
 	if ((!array->a) || (!array->b) || (argc == 1)
-		|| (find_dup(array) == 1) || (check_arg_size(array) == 1))
+		|| (find_dup(array) == 1))
 		error("Error\n");
 	return (1);
 }
@@ -62,11 +60,15 @@ int	main(int argc, char **argv)
 	char		*tmp;
 
 	array = (t_arrays *)malloc(sizeof(t_arrays));
+	if (!array)
+		error("Error\n");
 	if (argc == 2)
 	{
 		tmp = ft_strdup(argv[1]);
 		argc = ft_word_count(tmp, ' ') + 1;
-		argv = (char **)malloc((argc + 2) * sizeof(char *));
+		argv = (char **)malloc((argc + 3) * sizeof(char *));
+		if (!argv)
+			error("Error\n");
 		argv = ft_split(tmp, ' ');
 	}
 	array_init(array, argc, argv);
@@ -74,5 +76,7 @@ int	main(int argc, char **argv)
 	if (init_check(array, argc) == 0)
 		return (0);
 	sel_sort(array);
+	free(array->bubble_sort_arr);
+	free(array);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: tytang <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 17:03:28 by tytang            #+#    #+#             */
-/*   Updated: 2022/12/19 15:39:55 by tytang           ###   ########.fr       */
+/*   Updated: 2022/12/22 14:56:43 by tytang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	rotatea(t_arrays *array)
 	{
 		temp_arr = (int *)malloc((array->a_size + 1) * sizeof(int));
 		i = 0;
+		if (!temp_arr)
+			error("Error\n");
 		while (i <= array->a_size)
 		{
 			temp_arr[i] = array->a[i];
@@ -50,6 +52,8 @@ void	rotateb(t_arrays *array)
 	{
 		temp_arr = (int *)malloc((array->b_size + 1) * sizeof(int));
 		i = 0;
+		if (!temp_arr)
+			error("Error\n");
 		while (i <= array->b_size)
 		{
 			temp_arr[i] = array->b[i];
@@ -78,6 +82,8 @@ void	revrotatea(t_arrays *array)
 	{
 		temp_arr = (int *)malloc((array->a_size + 1) * sizeof(int));
 		i = 0;
+		if (!temp_arr)
+			error("Error\n");
 		while (i <= array->a_size)
 		{
 			temp_arr[i] = array->a[i];
@@ -106,6 +112,8 @@ void	revrotateb(t_arrays *array)
 	{
 		temp_arr = (int *)malloc((array->b_size + 1) * sizeof(int));
 		i = 0;
+		if (!temp_arr)
+			error("Error\n");
 		while (i <= array->b_size)
 		{
 			temp_arr[i] = array->b[i];
